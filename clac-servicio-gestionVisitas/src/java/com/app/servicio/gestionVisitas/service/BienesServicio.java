@@ -25,7 +25,7 @@ public class BienesServicio {
     public List<Bienes> getAll(){
         System.out.println("Recuperando todos los bienes de la BD.");
         
-        String sql = "SELECT * FROM registro.bienes AS B INNER JOIN registro.informacionfinanciera AS INFIN ON B.idInformacionFinanciera = INFIN.idInformacionFinanciera INNER JOIN registro.informacionorganizacional AS INFORG ON INFIN.idInformacionOrganizacional = INFORG.idInformacionOrganizacional";
+        String sql = "SELECT * FROM registro.bienes AS B INNER JOIN registro.informacionfinanciera AS INFIN ON B.idInformacionFinanciera = INFIN.idInformacionFinanciera INNER JOIN registro.informacionorganizacional AS INFORG ON INFIN.idInformacionOrganizacional = INFORG.idInformacionOrganizacional ORDER BY INFORG.nombreNegocio ASC";
         
         bienes = this.jdbcTemplate.query(sql, new BienesRowMapper2());
         
@@ -105,6 +105,20 @@ public class BienesServicio {
             
             return false;
         }
+    }
+    
+    
+    // FILTRAR POR GET
+    public List<Bienes> searchByID(int idInfFin){
+        System.out.println("Recuperando todos los datos de los Bienes de la BD.");
+        
+        String sql = "SELECT * FROM registro.bienes AS B INNER JOIN registro.informacionfinanciera AS INFIN ON B.idInformacionFinanciera = INFIN.idInformacionFinanciera INNER JOIN registro.informacionorganizacional AS INFORG ON INFIN.idInformacionOrganizacional = INFORG.idInformacionOrganizacional WHERE INFIN.idInformacionFinanciera = " + idInfFin;
+        
+        bienes = this.jdbcTemplate.query(sql, new BienesRowMapper2());
+        
+        System.out.println(bienes);
+        
+        return bienes;
     }
    
 }

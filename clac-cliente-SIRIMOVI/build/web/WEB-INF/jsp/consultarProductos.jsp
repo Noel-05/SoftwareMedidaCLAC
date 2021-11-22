@@ -94,11 +94,15 @@
             </div>
         </div>
         </br></br>
+        
+        <div align="center">
+            <c:if test="${empty productosGetAll}" >
+                No hay Productos en la Base de Datos para este registro.
+                </br>
+                Puedes <strong><a href="${addUrl}">Agregar</a></strong> un Producto aquí.
+            </c:if>
+        </div>
 
-        <c:if test="${empty productosGetAll}" >
-            No hay productos en la Base de Datos. Puedes <a href="${addUrl}">Agregar</a> un producto.
-        </c:if>
-            
     </body>
 </html>
 

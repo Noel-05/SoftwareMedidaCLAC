@@ -175,7 +175,7 @@ public class UsuarioController {
             
             // PARA MOSTRAR LO DE LA TABLA RUBRO (El Select)
             ResponseEntity<RolList> result2 = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionUsuarios/roles", 
-                    HttpMethod.GET, entity, RolList.class);
+                    HttpMethod.GET, entity2, RolList.class);
             // Agregamos al Model
             model.addAttribute("rolList", result2.getBody().getData());
 

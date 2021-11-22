@@ -8,6 +8,7 @@ public class InformacionFinanciera {
     int idinformacionFinanciera;
     int idinformacionOrganizacional;
     String nombreNegocio;
+    String paisNegocio;
     String rangoSalariosEmpleados;
     float saldoDeudasActual;
     float saldoLiquidez;
@@ -58,6 +59,14 @@ public class InformacionFinanciera {
 
     public void setNombreNegocio(String nombreNegocio) {
         this.nombreNegocio = nombreNegocio;
+    }
+
+    public String getPaisNegocio() {
+        return paisNegocio;
+    }
+
+    public void setPaisNegocio(String paisNegocio) {
+        this.paisNegocio = paisNegocio;
     }
     
     @Override

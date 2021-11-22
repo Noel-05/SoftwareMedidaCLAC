@@ -25,7 +25,7 @@ public class InformacionOrganizacionalServicio {
     public List<InformacionOrganizacional> getAll(){
         System.out.println("Recuperando todos los datos de información organizacional de la BD.");
         
-        String sql = "SELECT * FROM registro.informacionorganizacional AS INFORG INNER JOIN registro.rubro AS R ON INFORG.idRubro = R.idRubro";
+        String sql = "SELECT * FROM registro.informacionorganizacional AS INFORG INNER JOIN registro.rubro AS R ON INFORG.idRubro = R.idRubro INNER JOIN registro.pais P ON INFORG.idPais = P.idpais ORDER BY INFORG.nombreNegocio, P.nombrePais ASC";
         
         informacionOrganizacionales = this.jdbcTemplate.query(sql, new InformacionOrganizacionalRowMapper2());
         
@@ -39,7 +39,7 @@ public class InformacionOrganizacionalServicio {
     public InformacionOrganizacional getByID(int id){
         System.out.println("Recuperando informacionOrganizacional con ID: " + id);
         
-        String sql = "SELECT * FROM registro.informacionorganizacional AS INFORG INNER JOIN registro.rubro AS R ON INFORG.idRubro = R.idRubro WHERE INFORG.idInformacionOrganizacional = ?";
+        String sql = "SELECT * FROM registro.informacionorganizacional AS INFORG INNER JOIN registro.rubro AS R ON INFORG.idRubro = R.idRubro INNER JOIN registro.pais P ON INFORG.idPais = P.idpais WHERE INFORG.idInformacionOrganizacional = ?";
         
         return this.jdbcTemplate.queryForObject(sql, new InformacionOrganizacionalRowMapper2(), id);
     }
@@ -54,12 +54,12 @@ public class InformacionOrganizacionalServicio {
         cal.add(Calendar.DAY_OF_YEAR, 1);
         
         try{
-            String sql = "INSERT INTO registro.informacionorganizacional(idRubro, nombreNegocio, cantidadEmpleados, direccionNegocio, cantidadSucursales, fechaRegistroVisita) "
-                    + "VALUES(?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO registro.informacionorganizacional(idRubro, nombreNegocio, cantidadEmpleados, direccionNegocio, cantidadSucursales, fechaRegistroVisita, idPais) "
+                    + "VALUES(?, ?, ?, ?, ?, ?, ?)";
             
             this.jdbcTemplate.update(sql, informacionOrganizacional.getIdRubro(), informacionOrganizacional.getNombreNegocio(), 
                     informacionOrganizacional.getCantEmpleados(), informacionOrganizacional.getDireccionNegocio(), 
-                    informacionOrganizacional.getCantSucursales(), cal);
+                    informacionOrganizacional.getCantSucursales(), cal, informacionOrganizacional.getIdPais());
             
             System.out.println("Información Organizacional Insertada Correctamente. ");
             
@@ -82,11 +82,11 @@ public class InformacionOrganizacionalServicio {
         cal.add(Calendar.DAY_OF_YEAR, 1);
         
         try{
-            String sql = "UPDATE registro.informacionorganizacional SET idRubro=?, nombreNegocio=?, cantidadEmpleados=?, direccionNegocio=?, cantidadSucursales =?, fechaRegistroVisita=?  "
+            String sql = "UPDATE registro.informacionorganizacional SET idRubro=?, nombreNegocio=?, cantidadEmpleados=?, direccionNegocio=?, cantidadSucursales =?, fechaRegistroVisita=?, idPais=?  "
                     + "WHERE idInformacionOrganizacional = ?";
             
             this.jdbcTemplate.update(sql, informacionOrganizacional.getIdRubro(), informacionOrganizacional.getNombreNegocio(), informacionOrganizacional.getCantEmpleados(),
-                    informacionOrganizacional.getDireccionNegocio(), informacionOrganizacional.getCantSucursales(), cal, informacionOrganizacional.getIdInfOrganizacional());
+                    informacionOrganizacional.getDireccionNegocio(), informacionOrganizacional.getCantSucursales(), cal, informacionOrganizacional.getIdPais(), informacionOrganizacional.getIdInfOrganizacional());
             
             System.out.println("Informacion Organizacional Actualizada Correctamente.");
             
@@ -119,9 +119,19 @@ public class InformacionOrganizacionalServicio {
         }
     }
     
+    
+    
+    // FILTRAR POR GET
+    public List<InformacionOrganizacional> searchByID(int idPais){
+        System.out.println("Recuperando todos los datos de información organizacional de la BD.");
+        
+        String sql = "SELECT * FROM registro.informacionorganizacional AS INFORG INNER JOIN registro.rubro AS R ON INFORG.idRubro = R.idRubro INNER JOIN registro.pais P ON INFORG.idPais = P.idpais WHERE INFORG.idPais = " + idPais;
+        
+        informacionOrganizacionales = this.jdbcTemplate.query(sql, new InformacionOrganizacionalRowMapper2());
+        
+        System.out.println(informacionOrganizacionales);
+        
+        return informacionOrganizacionales;
+    }
+    
 }
-    
-    
-    
-    
-

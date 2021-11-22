@@ -24,7 +24,7 @@ public class MonitoreoServicio {
     public List<Monitoreo> getAll(){
         System.out.println("Recuperando todas los monitoreos de la BD.");
         
-        String sql = "SELECT * FROM registro.monitoreos AS M INNER JOIN registro.informacionorganizacional AS INFORG ON M.idInformacionOrganizacional =  INFORG.idInformacionOrganizacional";
+        String sql = "SELECT * FROM registro.monitoreos AS M INNER JOIN registro.informacionorganizacional AS INFORG ON M.idInformacionOrganizacional =  INFORG.idInformacionOrganizacional INNER JOIN registro.pais P ON P.idPais = INFORG.idPais ORDER BY INFORG.nombreNegocio ASC";
         
         monitoreos = this.jdbcTemplate.query(sql, new MonitoreoRowMapper2());
         
@@ -38,7 +38,7 @@ public class MonitoreoServicio {
     public Monitoreo getByID(int id){
         System.out.println("Recuperando monitoreo con ID: " + id);
         
-        String sql = "SELECT * FROM registro.monitoreos AS M INNER JOIN registro.informacionorganizacional AS INFORG ON M.idInformacionOrganizacional =  INFORG.idInformacionOrganizacional WHERE M.idMonitoreo = ?";
+        String sql = "SELECT * FROM registro.monitoreos AS M INNER JOIN registro.informacionorganizacional AS INFORG ON M.idInformacionOrganizacional =  INFORG.idInformacionOrganizacional INNER JOIN registro.pais P ON P.idPais = INFORG.idPais WHERE M.idMonitoreo = ?";
         
         return this.jdbcTemplate.queryForObject(sql, new MonitoreoRowMapper2(), id);
     }

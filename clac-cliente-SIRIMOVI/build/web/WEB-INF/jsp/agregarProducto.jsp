@@ -28,6 +28,7 @@
                 <div class="mb-3">
                     <form:label path="idInformacionComercial" class="form-label">Negocio </form:label>
                     <form:select path="idInformacionComercial" class="form-control" style="width: 30%;" required="true">
+                        <option value="">Seleccione el negocio...</option>
                         <c:forEach var="nomNeg" items="${informacionComercialList}">
                             <form:option value="${nomNeg.idInformacionComercial}">${nomNeg.nombreNegocio}</form:option>
                         </c:forEach>

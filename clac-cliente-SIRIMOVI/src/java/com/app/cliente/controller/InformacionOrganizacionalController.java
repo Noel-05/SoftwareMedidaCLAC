@@ -3,6 +3,8 @@ package com.app.cliente.controller;
 
 import com.app.cliente.domain.visitas.InformacionOrganizacional;
 import com.app.cliente.domain.visitas.InformacionOrganizacionalList;
+import com.app.cliente.domain.visitas.Pais;
+import com.app.cliente.domain.visitas.PaisList;
 import com.app.cliente.domain.visitas.Rubro;
 import com.app.cliente.domain.visitas.RubroList;
 import java.text.SimpleDateFormat;
@@ -46,13 +48,20 @@ public class InformacionOrganizacionalController {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(acceptableMediaTypes);
         HttpEntity<InformacionOrganizacional> entity = new HttpEntity<InformacionOrganizacional>(headers);
+        HttpEntity<Pais> entity2 = new HttpEntity<Pais>(headers);
         
         //Enviamos el request via GET
         try{
             ResponseEntity<InformacionOrganizacionalList> result = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/informacionOrganizacional", 
                     HttpMethod.GET, entity, InformacionOrganizacionalList.class);
+            
+            ResponseEntity<PaisList> result2 = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/paises", 
+                    HttpMethod.GET, entity2, PaisList.class);
+            
             // Agregamos al Model
+            model.addAttribute("paisList", result2.getBody().getData());
             model.addAttribute("informacionOrganizacionalGetAll", result.getBody().getData());
+            model.addAttribute("informacionOrganizacionalAttribute", new InformacionOrganizacional());
         
         }catch(Exception e){
             System.out.println(e);
@@ -108,13 +117,19 @@ public class InformacionOrganizacionalController {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(acceptableMediaTypes);
         HttpEntity<Rubro> entity = new HttpEntity<Rubro>(headers);
+        HttpEntity<Pais> entity2 = new HttpEntity<Pais>(headers);
         
         //Enviamos el request via GET
         try{
             ResponseEntity<RubroList> result = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/rubros", 
                     HttpMethod.GET, entity, RubroList.class);
+            
+            ResponseEntity<PaisList> result2 = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/paises", 
+                    HttpMethod.GET, entity2, PaisList.class);
+            
             // Agregamos al Model
             model.addAttribute("rubrosList", result.getBody().getData());
+            model.addAttribute("paisList", result2.getBody().getData());
             model.addAttribute("informacionOrganizacionalAttribute", new InformacionOrganizacional());
         
         }catch(Exception e){
@@ -169,6 +184,7 @@ public class InformacionOrganizacionalController {
         headers.setAccept(acceptableMediaTypes);
         HttpEntity<InformacionOrganizacional> entity = new HttpEntity<InformacionOrganizacional>(headers);
         HttpEntity<Rubro> entity2 = new HttpEntity<Rubro>(headers);
+        HttpEntity<Pais> entity3 = new HttpEntity<Pais>(headers);
 
         // Enviamos el Request via GET
         try {
@@ -180,9 +196,15 @@ public class InformacionOrganizacionalController {
             
             // PARA MOSTRAR LO DE LA TABLA RUBRO (El Select)
             ResponseEntity<RubroList> result2 = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/rubros", 
-                    HttpMethod.GET, entity, RubroList.class);
+                    HttpMethod.GET, entity2, RubroList.class);
             // Agregamos al Model
             model.addAttribute("rubrosList", result2.getBody().getData());
+            
+            // PARA MOSTRAR LO DE LA TABLA Pais (El Select)
+            ResponseEntity<PaisList> result3 = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/paises", 
+                    HttpMethod.GET, entity3, PaisList.class);
+            // Agregamos al Model
+            model.addAttribute("paisList", result3.getBody().getData());
 
         } catch (Exception e) {
                 System.out.println(e);
@@ -239,4 +261,52 @@ public class InformacionOrganizacionalController {
         // Esto es para enviar al JSP de WEB-INF/jsp/consultarPersonas.jsp
         return "redirect:/getallInformacionOrganizacional";
     }
+    
+    
+    
+    // FILTRAR
+    // Mostrar TODAS las personas en el JSP
+    @RequestMapping(value = "/filtrarInformacionOrganizacionalGet", method = RequestMethod.POST)
+    public String searchInformacionOrganizacionalById(@RequestParam("paisSel") int idPais, Model model) {
+        System.out.println("--> Recuperando informacion organizacional con ID: " + idPais);
+
+        //Preparar Tipos de datos a trabajar
+        List<MediaType> acceptableMediaTypes = new ArrayList<MediaType>();
+        acceptableMediaTypes.add(MediaType.APPLICATION_XML);
+
+        //Preparo el header
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(acceptableMediaTypes);
+        HttpEntity<InformacionOrganizacional> entity = new HttpEntity<InformacionOrganizacional>(headers);
+        HttpEntity<Pais> entity2 = new HttpEntity<Pais>(headers);
+
+        // Enviamos el Request via GET
+        try {
+            if(idPais > 0){
+                ResponseEntity<InformacionOrganizacionalList> result = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/filtrarInformacionOrganizacional/{idPais}", 
+                        HttpMethod.GET, entity, InformacionOrganizacionalList.class, idPais);
+                
+                model.addAttribute("informacionOrganizacionalGetAll", result.getBody().getData());
+            }else{
+                ResponseEntity<InformacionOrganizacionalList> result = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/informacionOrganizacional", 
+                    HttpMethod.GET, entity, InformacionOrganizacionalList.class);
+                
+                model.addAttribute("informacionOrganizacionalGetAll", result.getBody().getData());
+            }
+            
+            ResponseEntity<PaisList> result2 = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/paises", 
+                    HttpMethod.GET, entity2, PaisList.class);
+            
+            // Agregamos al Model
+            model.addAttribute("paisList", result2.getBody().getData());
+            model.addAttribute("informacionOrganizacionalAttribute", new InformacionOrganizacional());
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        // Esto es para enviar al JSP de WEB-INF/jsp/obtenerUsuario.jsp
+        return "consultarInformacionOrganizacional";
+    }
+    
 }

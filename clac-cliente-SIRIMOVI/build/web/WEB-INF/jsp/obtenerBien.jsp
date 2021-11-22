@@ -26,18 +26,19 @@
             </c:if>
 
             <c:if test="${!empty bienGetId}">
+                
                 <div class="mb-3">
-                    <label path="nombreBien" class="form-label"><strong>Nombre Bien </strong></label>
-                    <input path="nombreBien" type="text" disabled class="form-control" style="width: 30%; text-align: center;" value="${bienGetId.nombreBien}"/>
+                    <label path="nombreNegocio" class="form-label"><strong>Nombre del Negocio: </strong></label>
+                    <input path="nombreNegocio" type="text" disabled class="form-control" style="width: 30%; text-align: center;" value="${bienGetId.nombreNegocio}"/>
                 </div>
                 
                 <div class="mb-3">
-                    <label path="nombreNegocio" class="form-label"><strong>Nombre Negocio </strong></label>
-                    <input path="nombreNegocio" type="text" disabled class="form-control" style="width: 30%; text-align: center;" value="${bienGetId.nombreNegocio}"/>
+                    <label path="nombreBien" class="form-label"><strong>Nombre del Bien: </strong></label>
+                    <input path="nombreBien" type="text" disabled class="form-control" style="width: 30%; text-align: center;" value="${bienGetId.nombreBien}"/>
                 </div>
                     
                 <div class="mb-3">
-                    <label path="cantidadBien" class="form-label"><strong>Cantidad </strong></label>
+                    <label path="cantidadBien" class="form-label"><strong>Cantidad del Bien: </strong></label>
                     <input path="cantidadBien" type="text" disabled class="form-control" style="width: 30%; text-align: center;" value="${bienGetId.cantidadBien}"/>
                 </div>
                 

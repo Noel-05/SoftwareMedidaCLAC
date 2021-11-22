@@ -76,5 +76,23 @@ public class BienesController {
         
         return bienesServicio.delete(id).toString();
     }
+    
+    
+    
+    // LISTAR CON FILTRO
+    // Metodo para recuperar todas las personas de la BD
+    @RequestMapping(value="/bienesF/{idInfFin}", method=RequestMethod.GET, headers="Accept=application/json, application/xml")
+    private @ResponseBody BienesList searchBienById(@PathVariable("idInfFin") int idInfFin){
+        
+        System.out.println("********"+idInfFin);
+        
+        BienesList result = new BienesList();
+        
+        result.setData(bienesServicio.searchByID(idInfFin));
+        
+        System.out.println(result);
+        
+        return result;
+    }
   
 }

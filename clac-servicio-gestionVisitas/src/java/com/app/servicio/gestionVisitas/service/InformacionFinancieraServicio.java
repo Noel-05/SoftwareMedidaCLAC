@@ -21,7 +21,7 @@ public class InformacionFinancieraServicio {
     public List<InformacionFinanciera> getAll(){
         System.out.println("Recuperando toda la Informacion Financiera de la BD.");
         
-        String sql = "SELECT * FROM registro.informacionfinanciera AS INFFIN INNER JOIN registro.informacionorganizacional AS INFORG ON INFFIN.idInformacionOrganizacional =  INFORG.idInformacionOrganizacional";
+        String sql = "SELECT * FROM registro.informacionfinanciera AS INFFIN INNER JOIN registro.informacionorganizacional AS INFORG ON INFFIN.idInformacionOrganizacional =  INFORG.idInformacionOrganizacional INNER JOIN registro.pais AS P ON P.idPais = INFORG.idPais ORDER BY INFORG.nombreNegocio ASC";
         infoFinanciera = this.jdbcTemplate.query(sql, new InformacionFinancieraRowMapper2());
         System.out.println(infoFinanciera);
         
@@ -31,7 +31,7 @@ public class InformacionFinancieraServicio {
     public InformacionFinanciera getByID(int id){
         System.out.println("Recuperando Informacion Financiera con ID: " + id);
         
-        String sql = "SELECT * FROM registro.informacionfinanciera AS INFFIN INNER JOIN registro.informacionorganizacional AS INFORG ON INFFIN.idInformacionOrganizacional =  INFORG.idInformacionOrganizacional WHERE INFFIN.idInformacionFinanciera = ?";
+        String sql = "SELECT * FROM registro.informacionfinanciera AS INFFIN INNER JOIN registro.informacionorganizacional AS INFORG ON INFFIN.idInformacionOrganizacional =  INFORG.idInformacionOrganizacional INNER JOIN registro.pais AS P ON P.idPais = INFORG.idPais WHERE INFFIN.idInformacionFinanciera = ?";
         
         return this.jdbcTemplate.queryForObject(sql, new InformacionFinancieraRowMapper2(), id);
     }
@@ -96,6 +96,20 @@ public class InformacionFinancieraServicio {
             
             return false;
         }
+    }
+    
+    
+    // FILTRAR POR GET
+    public List<InformacionFinanciera> searchByID(int idInfOrg){
+        System.out.println("Recuperando todos los datos de información financiera de la BD.");
+        
+        String sql = "SELECT * FROM registro.informacionfinanciera AS INFFIN INNER JOIN registro.informacionorganizacional AS INFORG ON INFFIN.idInformacionOrganizacional =  INFORG.idInformacionOrganizacional WHERE  INFFIN.idInformacionOrganizacional = " + idInfOrg;
+        
+        infoFinanciera = this.jdbcTemplate.query(sql, new InformacionFinancieraRowMapper2());
+        
+        System.out.println(infoFinanciera);
+        
+        return infoFinanciera;
     }
 }
 

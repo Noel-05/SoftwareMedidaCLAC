@@ -22,7 +22,7 @@
 
         <div class="container mt-4" align="center">
             <c:if test="${empty monitoreoGetId}">
-                No se encontraron Registros!
+                No se encontraron Registros para este Monitoreo!
             </c:if>
 
             <c:if test="${!empty monitoreoGetId}">
@@ -33,7 +33,12 @@
                 </div>
                 
                 <div class="mb-3">
-                    <label path="fechaRegistroMonitoreo" class="form-label"><strong>Fecha de Monitoreo: </strong></label>
+                    <label path="nombrePais" class="form-label"><strong>País del Negocio: </strong></label>
+                    <input path="nombrePais" type="text" disabled class="form-control" style="width: 30%; text-align: center;" value="${monitoreoGetId.nombrePais}"/>
+                </div>
+                
+                <div class="mb-3">
+                    <label path="fechaRegistroMonitoreo" class="form-label"><strong>Fecha del Monitoreo: </strong></label>
                     <input path="fechaRegistroMonitoreo" type="text" disabled class="form-control" style="width: 30%; text-align: center;" pattern="dd/MM/yyyy" value="${monitoreoGetId.fechaRegistroMonitoreo}"/>
                 </div>
                 

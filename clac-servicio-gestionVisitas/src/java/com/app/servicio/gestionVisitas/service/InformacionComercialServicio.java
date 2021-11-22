@@ -24,7 +24,7 @@ public class InformacionComercialServicio {
     public List<InformacionComercial> getAll(){
         System.out.println("Recuperando todas la Informacion Comercial de la BD.");
         
-        String sql = "SELECT * FROM registro.informacioncomercial AS INFCOM INNER JOIN registro.informacionorganizacional AS INFORG ON INFCOM.idInformacionOrganizacional =  INFORG.idInformacionOrganizacional";
+        String sql = "SELECT * FROM registro.informacioncomercial AS INFCOM INNER JOIN registro.informacionorganizacional AS INFORG ON INFCOM.idInformacionOrganizacional =  INFORG.idInformacionOrganizacional INNER JOIN registro.pais AS P ON P.idPais = INFORG.idPais ORDER BY INFORG.nombreNegocio ASC";
         
         informacionComercial = this.jdbcTemplate.query(sql, new  InformacionComercialRowMapper2());
         
@@ -38,7 +38,7 @@ public class InformacionComercialServicio {
     public InformacionComercial getByID(int id){
         System.out.println("Recuperando persona con ID: " + id);
         
-        String sql = "SELECT * FROM registro.informacioncomercial AS INFCOM INNER JOIN registro.informacionorganizacional AS INFORG ON INFCOM.idInformacionOrganizacional =  INFORG.idInformacionOrganizacional WHERE INFCOM.idInformacionComercial = ?";
+        String sql = "SELECT * FROM registro.informacioncomercial AS INFCOM INNER JOIN registro.informacionorganizacional AS INFORG ON INFCOM.idInformacionOrganizacional =  INFORG.idInformacionOrganizacional INNER JOIN registro.pais AS P ON P.idPais = INFORG.idPais WHERE INFCOM.idInformacionComercial = ?";
         
         return this.jdbcTemplate.queryForObject(sql, new  InformacionComercialRowMapper2(), id);
     }
@@ -103,5 +103,19 @@ public class InformacionComercialServicio {
             
             return false;
         }
+    }
+    
+    
+    // FILTRAR POR GET
+    public List<InformacionComercial> searchByID(int idInfOrg){
+        System.out.println("Recuperando todos los datos de información comercial de la BD.");
+        
+        String sql = "SELECT * FROM registro.informacioncomercial AS INFCOM INNER JOIN registro.informacionorganizacional AS INFORG ON INFCOM.idInformacionOrganizacional =  INFORG.idInformacionOrganizacional WHERE INFCOM.idInformacionOrganizacional = " + idInfOrg;
+        
+        informacionComercial = this.jdbcTemplate.query(sql, new InformacionComercialRowMapper2());
+        
+        System.out.println(informacionComercial);
+        
+        return informacionComercial;
     }
 }

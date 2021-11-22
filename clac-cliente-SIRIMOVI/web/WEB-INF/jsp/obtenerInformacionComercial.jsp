@@ -28,8 +28,13 @@
             <c:if test="${!empty informacionComercialGetId}">
                 
                 <div class="mb-3">
-                    <label path="idInformacionOrganizacional" class="form-label"><strong>Negocio: </strong></label>
+                    <label path="idInformacionOrganizacional" class="form-label"><strong>Nombre del Negocio: </strong></label>
                     <input path="idInformacionOrganizacional" type="text" disabled class="form-control" style="width: 30%; text-align: center;" value="${informacionComercialGetId.nombreNegocio}"/>
+                </div>
+                
+                <div class="mb-3">
+                    <label path="paisNegocio" class="form-label"><strong>País del Negocio: </strong></label>
+                    <input path="paisNegocio" type="text" disabled class="form-control" style="width: 30%; text-align: center;" value="${informacionComercialGetId.paisNegocio}"/>
                 </div>
                     
                 <div class="mb-3">

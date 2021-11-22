@@ -28,6 +28,7 @@
                 <div class="mb-3">
                     <form:label path="idInfo" class="form-label">Negocio </form:label>
                     <form:select path="idInfo" class="form-control" style="width: 30%;" required="true">
+                        <option value="">Seleccione el negocio...</option>
                         <c:forEach var="nomNeg" items="${informacionOrganizacionalList}">
                             <form:option value="${nomNeg.idInfOrganizacional}">${nomNeg.nombreNegocio}</form:option>
                         </c:forEach>
@@ -35,7 +36,7 @@
                 </div>
                 
                 <div class="mb-3">
-                    <form:label path="cantidadProduccion" class="form-label">Cantidad de produccion: </form:label>
+                    <form:label path="cantidadProduccion" class="form-label">Cantidad de producción: </form:label>
                     <form:input path="cantidadProduccion" type="number" required="true" class="form-control" aria-describedby="emailHelp" style="width: 30%;"/>
                 </div>
                     

@@ -23,7 +23,7 @@ public class RubroServicio {
     public List<Rubro> getAll(){
         System.out.println("Recuperando todos los rubros de la BD.");
         
-        String sql = "SELECT * FROM registro.rubro;";
+        String sql = "SELECT * FROM registro.rubro ORDER BY nombreRubro ASC;";
         
         rubros = this.jdbcTemplate.query(sql, new RubroRowMapper());
         

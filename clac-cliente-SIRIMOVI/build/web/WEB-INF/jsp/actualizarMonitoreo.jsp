@@ -56,7 +56,7 @@
                 
                 <div class="mb-3">
                     <form:label path="fechaRegistroMonitoreo" class="form-label">Fecha: </form:label>
-                    <form:input path="fechaRegistroMonitoreo" type="date" class="form-control" aria-describedby="emailHelp" style="width: 30%;"/>
+                    <form:input path="fechaRegistroMonitoreo" required="true" type="date" class="form-control" aria-describedby="emailHelp" style="width: 30%;"/>
                 </div>
                     
                 <button type="submit" class="btn btn-primary">Guardar</button>

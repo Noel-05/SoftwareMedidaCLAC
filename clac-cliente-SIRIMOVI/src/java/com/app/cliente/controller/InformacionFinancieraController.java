@@ -171,7 +171,7 @@ public class InformacionFinancieraController {
             model.addAttribute("inforAttribute", result.getBody());
             
             ResponseEntity<InformacionOrganizacionalList> result2 = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/informacionOrganizacional", 
-                    HttpMethod.GET, entity, InformacionOrganizacionalList.class);
+                    HttpMethod.GET, entity2, InformacionOrganizacionalList.class);
             // Agregamos al Model
             model.addAttribute("informacionOrganizacionalList", result2.getBody().getData());
 
@@ -229,6 +229,39 @@ public class InformacionFinancieraController {
 
         // Esto es para enviar al JSP de WEB-INF/jsp/consultarPersonas.jsp
         return "redirect:/getAllInformacionFinanciera";
+    }
+    
+    
+    
+    // LISTAR FILTRADA
+    // Mostrar TODAS las personas en el JSP
+    @RequestMapping(value = "/getAllInformacionFinancieraF", method = RequestMethod.GET)
+    public String getAllInformacionFinancieraF(@RequestParam("idInfOrg") int idInfOrg, Model model) {
+        System.out.println("--> Recuperar la Informacion Financiera de: " + idInfOrg);
+        
+        //Preparar Tipos de datos a trabajar
+        List<MediaType> acceptableMediaTypes = new ArrayList<MediaType>();
+        acceptableMediaTypes.add(MediaType.APPLICATION_XML);
+        
+        //Preparo el header
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(acceptableMediaTypes);
+        HttpEntity<InformacionFinanciera> entity = new HttpEntity<InformacionFinanciera>(headers);
+        
+        //Enviamos el request via GET
+        try{
+            ResponseEntity<InformacionFinancieraList> result = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/financieralistF/{idInfOrg}", 
+                    HttpMethod.GET, entity, InformacionFinancieraList.class, idInfOrg);
+            
+            // Agregamos al Model
+            model.addAttribute("infoGetAll", result.getBody().getData());
+        
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
+        // Esto es para enviar al JSP de WEB-INF/jsp/consultarPersonas.jsp
+        return "consultarInformacionFinanciera";
     }
     
 }

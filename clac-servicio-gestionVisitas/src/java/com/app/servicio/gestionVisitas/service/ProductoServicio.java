@@ -24,7 +24,7 @@ public class ProductoServicio {
     public List<Producto> getAll(){
         System.out.println("Recuperando todos los productos de la BD.");
         
-        String sql = "SELECT * FROM registro.productos AS P INNER JOIN registro.informacioncomercial AS INFCOM ON P.idInformacionComercial =  INFCOM.idInformacionComercial INNER JOIN registro.informacionorganizacional AS INFORG ON INFCOM.idInformacionOrganizacional =  INFORG.idInformacionOrganizacional";
+        String sql = "SELECT * FROM registro.productos AS P INNER JOIN registro.informacioncomercial AS INFCOM ON P.idInformacionComercial =  INFCOM.idInformacionComercial INNER JOIN registro.informacionorganizacional AS INFORG ON INFCOM.idInformacionOrganizacional =  INFORG.idInformacionOrganizacional ORDER BY INFORG.nombreNegocio ASC";
         
         productos = this.jdbcTemplate.query(sql, new ProductoRowMapper2());
         
@@ -104,6 +104,20 @@ public class ProductoServicio {
             
             return false;
         }
+    }
+    
+    
+    // FILTRAR POR GET
+    public List<Producto> searchByID(int idInfCom){
+        System.out.println("Recuperando todos los datos de los Bienes de la BD.");
+        
+        String sql = "SELECT * FROM registro.productos AS P INNER JOIN registro.informacioncomercial AS INFCOM ON P.idInformacionComercial =  INFCOM.idInformacionComercial INNER JOIN registro.informacionorganizacional AS INFORG ON INFCOM.idInformacionOrganizacional =  INFORG.idInformacionOrganizacional WHERE INFCOM.idInformacionComercial = " + idInfCom;
+        
+        productos = this.jdbcTemplate.query(sql, new ProductoRowMapper2());
+        
+        System.out.println(productos);
+        
+        return productos;
     }
       
 }

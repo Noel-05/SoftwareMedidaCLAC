@@ -9,6 +9,7 @@ public class InformacionComercial {
     int idInformacionComercial;
     int idInformacionOrganizacional;
     String nombreNegocio;
+    String paisNegocio;
     String departamentosDeComercioInterior;
     String paisesDeComercioExterior;
     String empresasSocias;
@@ -59,6 +60,14 @@ public class InformacionComercial {
 
     public void setNombreNegocio(String nombreNegocio) {
         this.nombreNegocio = nombreNegocio;
+    }
+    
+    public String getPaisNegocio() {
+        return paisNegocio;
+    }
+
+    public void setPaisNegocio(String paisNegocio) {
+        this.paisNegocio = paisNegocio;
     }
     
     @Override

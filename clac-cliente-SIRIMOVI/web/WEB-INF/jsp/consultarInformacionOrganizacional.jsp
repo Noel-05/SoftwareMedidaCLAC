@@ -1,5 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,16 +19,55 @@
         </br>
         
         <c:url var="addUrl" value="/addInformacionOrganizacional" />
+        <c:url var="filtrarUrl" value="/filtrarInformacionOrganizacionalGet" />
+        <c:url var="getInfCom" value="/getallInformacionComercial" />
+        <c:url var="getInfFin" value="/getAllInformacionFinanciera" />
         
         <h1 align="center">Registro de Visita</h1>
         </br>
         <hr size="4px" style="width:50%; margin: auto; color: black;" />
         </br>
         <h4 align="center">Consulta de Informaci&oacute;n Organizacional</h4>
-        </br>
-        </br>
+                
+        <div class="container mt-4" align="center">
+            <form method="POST" action="${filtrarUrl}">
+                <div class="mb-3">
+                    <div style="display: inline-block">
+                        <select class="form-control" style="width: 100%;" id="paisSel" required name="paisSel">
+                            <option value="">Seleccione el país a filtrar...</option>
+                            <option value="0" style="color: red;">TODOS</option>
+                            <c:forEach var="nomPa" items="${paisList}">
+                                <option value="${nomPa.idPais}">${nomPa.nombrePais}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="background-color: white; border-color: blue; color: blue;" >Filtrar</button>
+                </div>
+            </form>
+        </div>
         
-        <p align="center"><a href="${addUrl}" class="btn btn-success"> Agregar </a></p>
+        <div class="container mt-4" align="center">
+            <div style="display: inline-block">
+                <a href="${getInfCom}" class="btn btn-success" title="Consultar Información Comercial">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart-fill" viewBox="0 0 16 16">
+                        <path d="M1 11a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3zm5-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V2z"/>
+                    </svg>
+                    |
+                </a>
+            </div>
+            &nbsp;
+            <div style="display: inline-block">
+                <a href="${addUrl}" class="btn btn-success" title="Agregar Información Organizacional"> Agregar </a>
+            </div>
+            &nbsp;
+            <div style="display: inline-block">
+                <a href="${getInfFin}" class="btn btn-success" title="Consultar Información Financiera">
+                    | <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 16 16">
+                        <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
         
         <i class="bi bi-trash-fill"></i>
         
@@ -43,7 +83,7 @@
                         <thead>
                             <tr>
                                 <th class="text-center" style="color:red"><strong> Nombre del Negocio </strong></th>
-                                <th class="text-center" style="color:red"><strong> Dirección del Negocio </strong></th>
+                                <th class="text-center" style="color:red"><strong> Pais del Negocio </strong></th>
                                 <th class="text-center" style="color:red"><strong> Rubro </strong></th>
                                 <th class="text-center" style="color:red; width: 5%"><strong> Cant. de Empleados </strong></th>
                                 <th class="text-center" style="color:red; width: 5%"><strong> Cant. de Sucursales </strong></th>
@@ -59,12 +99,12 @@
                                 <c:url var="deleteUrl" value="/deleteInformacionOrganizacional?id=${informacionOrganizacional.idInfOrganizacional}" />
                                 <c:url var="getUrl" value="/getIdInformacionOrganizacional?id=${informacionOrganizacional.idInfOrganizacional}" />
                                 
-                                <c:url var="getInfCom" value="/getallInformacionComercial" />
-                                <c:url var="getInfFin" value="/getAllInformacionFinanciera" />
+                                <c:url var="getInfComF" value="/getallInformacionComercialF?idInfOrg=${informacionOrganizacional.idInfOrganizacional}" />
+                                <c:url var="getInfFinF" value="/getAllInformacionFinancieraF?idInfOrg=${informacionOrganizacional.idInfOrganizacional}" />
                                 
                                 <tr>
                                     <td><c:out value="${informacionOrganizacional.nombreNegocio}" /></td>
-                                    <td><c:out value="${informacionOrganizacional.direccionNegocio}" /></td>
+                                    <td><c:out value="${informacionOrganizacional.nombrePais}" /></td>
                                     <td><c:out value="${informacionOrganizacional.nombreRubro}" /></td>
                                     <td><c:out value="${informacionOrganizacional.cantEmpleados}" /></td>
                                     <td><c:out value="${informacionOrganizacional.cantSucursales}" /></td>
@@ -92,13 +132,13 @@
                                     </td>
                                     
                                     <td>
-                                        <a href="${getInfCom}" class="btn btn-success btn-sm" title="Agregar Información Comercial">
+                                        <a href="${getInfComF}" class="btn btn-success btn-sm" title="Agregar Información Comercial">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart-fill" viewBox="0 0 16 16">
                                                 <path d="M1 11a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3zm5-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V2z"/>
                                             </svg>
                                         </a>
                                             
-                                        <a href="${getInfFin}" class="btn btn-success btn-sm" title="Agregar Información Financiera">
+                                        <a href="${getInfFinF}" class="btn btn-success btn-sm" title="Agregar Información Financiera">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 16 16">
                                                 <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
                                             </svg>
@@ -116,10 +156,13 @@
         </div>
         </br></br>
 
-        <c:if test="${empty informacionOrganizacionalGetAll}" >
-            No hay Información Organizacional en la Base de Datos. Puedes <a href="${addUrl}">Agregar</a> una Información Organizacional.
-        </c:if>
+        <div align="center">
+            <c:if test="${empty informacionOrganizacionalGetAll}" >
+                No hay Información Organizacional en la Base de Datos para este registro.
+                </br>
+                Puedes <strong><a href="${addUrl}">Agregar</a></strong> una Información Organizacional aquí.
+            </c:if>
+        </div>
             
     </body>
 </html>
-

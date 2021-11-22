@@ -76,4 +76,22 @@ public class ProductoController {
         
         return productoServicio.delete(id).toString();
     }
+    
+    
+    
+    // LISTAR CON FILTRO
+    // Metodo para recuperar todas las personas de la BD
+    @RequestMapping(value="/productosF/{idInfCom}", method=RequestMethod.GET, headers="Accept=application/json, application/xml")
+    private @ResponseBody ProductoList searchProductoById(@PathVariable("idInfCom") int idInfCom){
+        
+        System.out.println("********"+idInfCom);
+        
+       ProductoList result = new ProductoList();
+        
+        result.setData(productoServicio.searchByID(idInfCom));
+        
+        System.out.println(result);
+        
+        return result;
+    }
 }

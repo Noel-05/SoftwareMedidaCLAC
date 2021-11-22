@@ -40,6 +40,7 @@
                 <div class="mb-3">
                     <form:label path="idRol" class="form-label">Rol: </form:label>
                     <form:select path="idRol" class="form-control" style="width: 30%;" required="true">
+                        <option value="">Seleccione el rol del usuario...</option>
                         <c:forEach var="nomRol" items="${rolList}">
                             <form:option value="${nomRol.idRol}">${nomRol.nombreRol}</form:option>
                         </c:forEach>

@@ -27,8 +27,18 @@
                     
                 <div class="mb-3">
                     <form:label path="nombreNegocio" class="form-label">Nombre del negocio: </form:label>
-                    <form:input path="nombreNegocio" required="true" type="text" class="form-control" aria-describedby="emailHelp" style="width: 30%;"/>
+                    <form:input path="nombreNegocio" required="true" type="text" class="form-control" aria-describedby="emailHelp" style="width: 30%;" />
                     <div id="emailHelp" class="form-text">NO utilizar tildes ni el caracter Ñ.</div>
+                </div>
+                    
+                <div class="mb-3">
+                    <form:label path="idPais" class="form-label">Pais </form:label>
+                    <form:select path="idPais" class="form-control" style="width: 30%;" required="true">
+                        <option value="">Seleccione el país del negocio...</option>
+                        <c:forEach var="nomPa" items="${paisList}">
+                            <form:option value="${nomPa.idPais}">${nomPa.nombrePais}</form:option>
+                        </c:forEach>
+                    </form:select>
                 </div>
                 
                 <div class="mb-3">
@@ -40,6 +50,7 @@
                 <div class="mb-3">
                     <form:label path="idRubro" class="form-label">Rubro: </form:label>
                     <form:select path="idRubro" class="form-control" style="width: 30%;" required="true">
+                        <option value="">Seleccione el rubro del negocio...</option>
                         <c:forEach var="nomRu" items="${rubrosList}">
                             <form:option value="${nomRu.idRubro}">${nomRu.nombreRubro}</form:option>
                         </c:forEach>
@@ -48,17 +59,17 @@
                 
                 <div class="mb-3">
                     <form:label path="cantEmpleados" class="form-label">Cantidad de empleados: </form:label>
-                    <form:input path="cantEmpleados" required="true" type="number" class="form-control" aria-describedby="emailHelp" style="width: 30%;"/>
+                    <form:input path="cantEmpleados" required="true" type="number" class="form-control" style="width: 30%;" />
                 </div>
                    
                 <div class="mb-3">
                     <form:label path="cantSucursales" class="form-label">Cantidad de sucursales: </form:label>
-                    <form:input path="cantSucursales" required="true" type="number" class="form-control" aria-describedby="emailHelp" style="width: 30%;"/>
+                    <form:input path="cantSucursales" required="true" type="number" class="form-control" style="width: 30%;"/>
                 </div>
                 
                 <div class="mb-3">
                     <form:label path="fechaRegistroVisita" class="form-label">Fecha: </form:label>
-                    <form:input path="fechaRegistroVisita" type="date" class="form-control" aria-describedby="emailHelp" style="width: 30%;"/>
+                    <form:input path="fechaRegistroVisita" type="date" required="true" class="form-control" aria-describedby="emailHelp" style="width: 30%;"/>
                 </div>
                
                 <button type="submit" class="btn btn-primary">Guardar</button>

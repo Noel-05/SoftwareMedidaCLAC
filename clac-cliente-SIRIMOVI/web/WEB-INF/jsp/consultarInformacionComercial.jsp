@@ -26,12 +26,22 @@
         </br>
         <h4 align="center">Consulta de Informaci&oacute;n Comercial</h4>
         </br>
-        </br>
         
         <p align="center">
             <a href="${addUrl}" class="btn btn-success"> Agregar </a> 
             <a href="${getInfOrg}" class="btn btn-danger"> Regresar </a>
         </p>
+        
+        <div class="container mt-4" align="center">
+            <div style="display: inline-block">
+                <a href="${getProd}" class="btn btn-success btn-sm" title="Consultar Productos">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
+                        <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+                    </svg>
+                    | Productos
+                </a>
+            </div>
+        </div>
         
         <i class="bi bi-trash-fill"></i>
         
@@ -60,6 +70,7 @@
                                 <c:url var="editUrl" value="/updateInformacionComercial?id=${informacionComercial.idInformacionComercial}" />
                                 <c:url var="deleteUrl" value="/deleteInformacionComercial?id=${informacionComercial.idInformacionComercial}" />
                                 <c:url var="getUrl" value="/getIdInformacionComercial?id=${informacionComercial.idInformacionComercial}" />
+                                <c:url var="getProdF" value="/getallProductoF?idInfCom=${informacionComercial.idInformacionComercial}" />
                                 
                                 <tr>
                                     <td><c:out value="${informacionComercial.nombreNegocio}" /></td>
@@ -88,7 +99,7 @@
                                     </td>
                                     
                                     <td>
-                                        <a href="${getProd}" class="btn btn-success btn-sm" title="Consultar Productos">
+                                        <a href="${getProdF}" class="btn btn-success btn-sm" title="Consultar Productos">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
                                                 <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
                                             </svg>
@@ -104,10 +115,14 @@
             </div>
         </div>
         </br></br>
-
-        <c:if test="${empty informacionComercialGetAll}" >
-            No hay Informacion Comercial en la Base de Datos. Puedes <a href="${addUrl}">Agregar</a> una monitoreo.
-        </c:if>
+        
+        <div align="center">
+            <c:if test="${empty informacionComercialGetAll}" >
+                No hay Información Comercial en la Base de Datos para este registro.
+                </br>
+                Puedes <strong><a href="${addUrl}">Agregar</a></strong> una Información Comercial aquí.
+            </c:if>
+        </div>
             
     </body>
 </html>

@@ -22,6 +22,8 @@ public class InformacionOrganizacionalRowMapper2 implements RowMapper<Informacio
         infOrg.setDireccionNegocio(rs.getString("direccionNegocio"));
         infOrg.setCantSucursales(rs.getInt("cantidadSucursales"));
         infOrg.setFechaRegistroVisita(rs.getDate("fechaRegistroVisita"));
+        infOrg.setIdPais(rs.getInt("idPais"));
+        infOrg.setNombrePais(rs.getString("nombrePais"));
      
         return infOrg;
     }

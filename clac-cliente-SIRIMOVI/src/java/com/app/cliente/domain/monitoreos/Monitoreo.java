@@ -12,6 +12,7 @@ public class Monitoreo {
     int idMonitoreo;
     int idInfo;
     String nombreNegocio;
+    String nombrePais;
     int cantidadProduccion;
     int cantidadPerdidas;
     int totalVentas;
@@ -83,6 +84,14 @@ public class Monitoreo {
 
     public void setFechaRegistroMonitoreo(Date fechaRegistroMonitoreo) {
         this.fechaRegistroMonitoreo = fechaRegistroMonitoreo;
+    }
+    
+    public String getNombrePais() {
+        return nombrePais;
+    }
+
+    public void setNombrePais(String nombrePais) {
+        this.nombrePais = nombrePais;
     }
     
     @Override

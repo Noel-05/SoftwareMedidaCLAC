@@ -40,10 +40,11 @@
                         
                         <thead>
                             <tr>
-                                <th class="text-center" style="color:red"><strong> Negocio </strong></th>
-                                <th class="text-center" style="color:red"><strong> Cant. de Producci&oacute;n </strong></th>
-                                <th class="text-center" style="color:red"><strong> Cant. de Perdidas </strong></th>
-                                <th class="text-center" style="color:red"><strong> Total de ventas </strong></th>
+                                <th class="text-center" style="color:red"><strong> Nombre Negocio </strong></th>
+                                <th class="text-center" style="color:red"><strong> País Negocio </strong></th>
+                                <th class="text-center" style="color:red"><strong> Producci&oacute;n </strong></th>
+                                <th class="text-center" style="color:red"><strong> Perdidas </strong></th>
+                                <th class="text-center" style="color:red"><strong> Ventas </strong></th>
                                 <th class="text-center" style="color:red"><strong> Ganancias </strong></th>
                                 <th class="text-center" style="color:red"><strong> Fecha Monitoreo </strong></th>
                                 <th class="text-center" style="color:red"><strong> Acciones </strong></th>
@@ -58,6 +59,7 @@
                                 
                                 <tr>
                                     <td><c:out value="${monitoreo.nombreNegocio}" /></td>
+                                    <td><c:out value="${monitoreo.nombrePais}" /></td>
                                     <td><c:out value="${monitoreo.cantidadProduccion}" /></td>
                                     <td><c:out value="${monitoreo.cantidadPerdidas}" /></td>
                                     <td><c:out value="${monitoreo.totalVentas}" /></td>
@@ -93,10 +95,14 @@
             </div>
         </div>
         </br></br>
+        
+        <div align="center">
+            <c:if test="${empty monitoreosGetAll}" >
+                No hay monitoreos en la Base de Datos para este registro. 
+                </br>
+                Puedes <strong><a href="${addUrl}">Agregar</a></strong> un monitoreos aquí.
+            </c:if>
+        </div>
 
-        <c:if test="${empty monitoreosGetAll}" >
-            No hay monitoreos en la Base de Datos. Puedes <a href="${addUrl}">Agregar</a> una monitoreo.
-        </c:if>
-            
     </body>
 </html>

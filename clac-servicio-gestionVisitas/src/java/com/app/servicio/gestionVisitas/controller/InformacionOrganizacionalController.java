@@ -76,4 +76,21 @@ public class InformacionOrganizacionalController {
         
         return informacionOrganizacionalServicio.delete(id).toString();
     }
+    
+    
+    // FILTRAR
+    // Metodo para recuperar todas las personas de la BD
+    @RequestMapping(value="/filtrarInformacionOrganizacional/{idPais}", method=RequestMethod.GET, headers="Accept=application/json, application/xml")
+    private @ResponseBody InformacionOrganizacionalList searchInformacionOrganizacionalById(@PathVariable("idPais") int idPais){
+        
+        System.out.println("********"+idPais);
+        
+        InformacionOrganizacionalList result = new InformacionOrganizacionalList();
+        
+        result.setData(informacionOrganizacionalServicio.searchByID(idPais));
+        
+        System.out.println(result);
+        
+        return result;
+    }
 }

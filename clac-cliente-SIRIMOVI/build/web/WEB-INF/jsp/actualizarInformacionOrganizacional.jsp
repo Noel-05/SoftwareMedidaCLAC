@@ -34,6 +34,15 @@
                 </div>
                     
                 <div class="mb-3">
+                    <form:label path="idPais" class="form-label">Pais </form:label>
+                    <form:select path="idPais" class="form-control" style="width: 30%;" required="true">
+                        <c:forEach var="nomPa" items="${paisList}">
+                            <form:option value="${nomPa.idPais}">${nomPa.nombrePais}</form:option>
+                        </c:forEach>
+                    </form:select>
+                </div>
+                    
+                <div class="mb-3">
                     <form:label path="direccionNegocio" class="form-label">Direccion del negocio:</form:label>
                     <form:input path="direccionNegocio" required="true" type="text" class="form-control" aria-describedby="emailHelp" style="width: 30%;"/>
                     <div id="emailHelp" class="form-text">NO utilizar tildes ni el caracter Ñ.</div>
@@ -60,7 +69,7 @@
                 
                 <div class="mb-3">
                     <form:label path="fechaRegistroVisita" class="form-label">Fecha: </form:label>
-                    <form:input path="fechaRegistroVisita" type="date" class="form-control" aria-describedby="emailHelp" style="width: 30%;"/>
+                    <form:input path="fechaRegistroVisita" required="true" type="date" class="form-control" aria-describedby="emailHelp" style="width: 30%;"/>
                 </div>
                 
                 <button type="submit" class="btn btn-primary">Guardar</button>

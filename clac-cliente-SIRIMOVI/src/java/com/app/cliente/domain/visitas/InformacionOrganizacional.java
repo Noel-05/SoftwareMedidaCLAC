@@ -11,8 +11,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class InformacionOrganizacional {
     int idInfOrganizacional;
     int idRubro;
+    int idPais;
     String nombreRubro;
     String nombreNegocio;
+    String nombrePais;
     int cantEmpleados;
     String direccionNegocio;
     int cantSucursales;
@@ -83,6 +85,22 @@ public class InformacionOrganizacional {
 
     public void setFechaRegistroVisita(Date fechaRegistroVisita) {
         this.fechaRegistroVisita = fechaRegistroVisita;
+    }
+
+    public int getIdPais() {
+        return idPais;
+    }
+
+    public void setIdPais(int idPais) {
+        this.idPais = idPais;
+    }
+
+    public String getNombrePais() {
+        return nombrePais;
+    }
+
+    public void setNombrePais(String nombrePais) {
+        this.nombrePais = nombrePais;
     }
     
     @Override

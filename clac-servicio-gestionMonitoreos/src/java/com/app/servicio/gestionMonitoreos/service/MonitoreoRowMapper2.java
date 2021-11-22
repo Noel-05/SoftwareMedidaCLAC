@@ -13,6 +13,7 @@ public class MonitoreoRowMapper2 implements RowMapper<Monitoreo>{
         monitoreo.setIdMonitoreo(rs.getInt("idMonitoreo"));
         monitoreo.setIdInfo(rs.getInt("idInformacionOrganizacional"));
         monitoreo.setNombreNegocio(rs.getString("nombreNegocio"));
+        monitoreo.setNombrePais(rs.getString("nombrePais"));
         monitoreo.setCantidadProduccion(rs.getInt("cantidadProduccion"));
         monitoreo.setCantidadPerdidas(rs.getInt("cantidadPerdidas"));
         monitoreo.setTotalVentas(rs.getInt("totalVentas"));

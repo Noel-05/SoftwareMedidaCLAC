@@ -64,4 +64,22 @@ public class InformacionFinancieraController {
         
         return infoFinanciera.delete(id).toString();
     }
+    
+    
+    
+    // LISTAR CON FILTRO
+    // Metodo para recuperar todas las personas de la BD
+    @RequestMapping(value="/financieralistF/{idInfOrg}", method=RequestMethod.GET, headers="Accept=application/json, application/xml")
+    private @ResponseBody InformacionFinancieraList searchInformacionFinancieraById(@PathVariable("idInfOrg") int idInfOrg){
+        
+        System.out.println("********"+idInfOrg);
+        
+        InformacionFinancieraList result = new InformacionFinancieraList();
+        
+        result.setData(infoFinanciera.searchByID(idInfOrg));
+        
+        System.out.println(result);
+        
+        return result;
+    }
 }

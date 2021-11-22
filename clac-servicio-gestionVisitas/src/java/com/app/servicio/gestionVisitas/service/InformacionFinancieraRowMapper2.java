@@ -16,6 +16,7 @@ public class InformacionFinancieraRowMapper2 implements RowMapper<InformacionFin
         info.setIdinformacionFinanciera(rs.getInt("idInformacionFinanciera"));
         info.setIdinformacionOrganizacional(rs.getInt("idInformacionOrganizacional"));
         info.setNombreNegocio(rs.getString("nombreNegocio"));
+        info.setPaisNegocio(rs.getString("nombrePais"));
         info.setRangoSalariosEmpleados(rs.getString("rangoSalarioEmpleados"));
         info.setSaldoDeudasActual(rs.getFloat("saldoDeudasActual"));
         info.setSaldoLiquidez(rs.getFloat("saldoLiquidez"));

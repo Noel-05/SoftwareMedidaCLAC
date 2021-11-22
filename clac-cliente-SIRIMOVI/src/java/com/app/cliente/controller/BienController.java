@@ -176,7 +176,7 @@ public class BienController {
             model.addAttribute("bienesAttribute", result.getBody());
             
             ResponseEntity<InformacionFinancieraList> result2 = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/financieralist", 
-                    HttpMethod.GET, entity, InformacionFinancieraList.class);
+                    HttpMethod.GET, entity2, InformacionFinancieraList.class);
             // Agregamos al Model
             model.addAttribute("informacionFinancieraList", result2.getBody().getData());
 
@@ -234,5 +234,37 @@ public class BienController {
 
         // Esto es para enviar al JSP de WEB-INF/jsp/consultarPersonas.jsp
         return "redirect:/getallBienes";
+    }
+    
+    
+    // LISTAR FILTRADA
+    // Mostrar TODAS las personas en el JSP
+    @RequestMapping(value = "/getallBienesF", method = RequestMethod.GET)
+    public String getAllBienesF(@RequestParam("idInfFin") int idInfFin, Model model) {
+        System.out.println("--> Recuperar los Bienes de: " + idInfFin);
+        
+        //Preparar Tipos de datos a trabajar
+        List<MediaType> acceptableMediaTypes = new ArrayList<MediaType>();
+        acceptableMediaTypes.add(MediaType.APPLICATION_XML);
+        
+        //Preparo el header
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(acceptableMediaTypes);
+        HttpEntity<Bienes> entity = new HttpEntity<Bienes>(headers);
+        
+        //Enviamos el request via GET
+        try{
+            ResponseEntity<BienesList> result = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/bienesF/{idInfFin}", 
+                    HttpMethod.GET, entity, BienesList.class, idInfFin);
+            
+            // Agregamos al Model
+            model.addAttribute("bienesGetAll", result.getBody().getData());
+        
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
+        // Esto es para enviar al JSP de WEB-INF/jsp/consultarPersonas.jsp
+        return "consultarBienes";
     }
 }

@@ -74,4 +74,22 @@ public class InformacionComercialController {
         
         return informacionComercialServicio.delete(id).toString();
     }
+    
+    
+    
+    // LISTAR CON FILTRO
+    // Metodo para recuperar todas las personas de la BD
+    @RequestMapping(value="/comerciallistF/{idInfOrg}", method=RequestMethod.GET, headers="Accept=application/json, application/xml")
+    private @ResponseBody InformacionComercialList searchInformacionComercialById(@PathVariable("idInfOrg") int idInfOrg){
+        
+        System.out.println("********"+idInfOrg);
+        
+        InformacionComercialList result = new InformacionComercialList();
+        
+        result.setData(informacionComercialServicio.searchByID(idInfOrg));
+        
+        System.out.println(result);
+        
+        return result;
+    }
 }

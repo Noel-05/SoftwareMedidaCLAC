@@ -174,7 +174,7 @@ public class InformacionComercialController {
             model.addAttribute("informacionComercialAttribute", result.getBody());
             
             ResponseEntity<InformacionOrganizacionalList> result2 = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/informacionOrganizacional", 
-                    HttpMethod.GET, entity, InformacionOrganizacionalList.class);
+                    HttpMethod.GET, entity2, InformacionOrganizacionalList.class);
             // Agregamos al Model
             model.addAttribute("InformacionOrganizacionalList", result2.getBody().getData());
 
@@ -232,6 +232,39 @@ public class InformacionComercialController {
 
         // Esto es para enviar al JSP de WEB-INF/jsp/consultarPersonas.jsp
         return "redirect:/getallInformacionComercial";
+    }
+    
+    
+    
+    // LISTAR FILTRADA
+    // Mostrar TODAS las personas en el JSP
+    @RequestMapping(value = "/getallInformacionComercialF", method = RequestMethod.GET)
+    public String getAllComercialFinancieraF(@RequestParam("idInfOrg") int idInfOrg, Model model) {
+        System.out.println("--> Recuperar la Informacion Comercial de: " + idInfOrg);
+        
+        //Preparar Tipos de datos a trabajar
+        List<MediaType> acceptableMediaTypes = new ArrayList<MediaType>();
+        acceptableMediaTypes.add(MediaType.APPLICATION_XML);
+        
+        //Preparo el header
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(acceptableMediaTypes);
+        HttpEntity<InformacionComercial> entity = new HttpEntity<InformacionComercial>(headers);
+        
+        //Enviamos el request via GET
+        try{
+            ResponseEntity<InformacionComercialList> result = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/comerciallistF/{idInfOrg}", 
+                    HttpMethod.GET, entity, InformacionComercialList.class, idInfOrg);
+            
+            // Agregamos al Model
+            model.addAttribute("informacionComercialGetAll", result.getBody().getData());
+        
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
+        // Esto es para enviar al JSP de WEB-INF/jsp/consultarPersonas.jsp
+        return "consultarInformacionComercial";
     }
     
 }

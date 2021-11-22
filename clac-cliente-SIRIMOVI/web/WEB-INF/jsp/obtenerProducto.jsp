@@ -27,22 +27,22 @@
 
             <c:if test="${!empty productoGetId}">
                 <div class="mb-3">
-                    <label path="nombre" class="form-label"><strong>Nombre Producto </strong></label>
-                    <input path="nombre" type="text" disabled class="form-control" style="width: 30%; text-align: center;" value="${productoGetId.nombre}"/>
+                    <label path="nombreNegocio" class="form-label"><strong>Nombre del Negocio: </strong></label>
+                    <input path="nombreNegocio" type="text" disabled class="form-control" style="width: 30%; text-align: center;" value="${productoGetId.nombreNegocio}"/>
                 </div>
                 
                 <div class="mb-3">
-                    <label path="nombreNegocio" class="form-label"><strong>Id Informacion Comercial: </strong></label>
-                    <input path="nombreNegocio" type="text" disabled class="form-control" style="width: 30%; text-align: center;" value="${productoGetId.nombreNegocio}"/>
+                    <label path="nombre" class="form-label"><strong>Nombre del Producto: </strong></label>
+                    <input path="nombre" type="text" disabled class="form-control" style="width: 30%; text-align: center;" value="${productoGetId.nombre}"/>
                 </div>
                     
                 <div class="mb-3">
-                    <label path="precioVenta" class="form-label"><strong>Precio Venta </strong></label>
+                    <label path="precioVenta" class="form-label"><strong>Precio de Venta: </strong></label>
                     <input path="precioVenta" type="text" disabled class="form-control" style="width: 30%; text-align: center;" value="$ ${productoGetId.precioVenta}"/>
                 </div>
                 
                 <div class="mb-3">
-                    <label path="precioFabricacion" class="form-label"><strong>Precio Fabricacion </strong></label>
+                    <label path="precioFabricacion" class="form-label"><strong>Precio de Fabricacion: </strong></label>
                     <input path="precioFabricacion" type="text" disabled class="form-control" style="width: 30%; text-align: center;" value="$ ${productoGetId.precioFabricacion}"/>
                 </div>
                 

@@ -174,7 +174,7 @@ public class ProductoController {
             model.addAttribute("productoAttribute", result.getBody());
             
             ResponseEntity<InformacionComercialList> result2 = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/informacionComercial", 
-                    HttpMethod.GET, entity, InformacionComercialList.class);
+                    HttpMethod.GET, entity2, InformacionComercialList.class);
             // Agregamos al Model
             model.addAttribute("informacionComercialList", result2.getBody().getData());
 
@@ -232,5 +232,38 @@ public class ProductoController {
 
         // Esto es para enviar al JSP de WEB-INF/jsp/consultarPersonas.jsp
         return "redirect:/getallProducto";
+    }
+    
+    
+            
+    // LISTAR FILTRADA
+    // Mostrar TODAS las personas en el JSP
+    @RequestMapping(value = "/getallProductoF", method = RequestMethod.GET)
+    public String getAllBienesF(@RequestParam("idInfCom") int idInfCom, Model model) {
+        System.out.println("--> Recuperar los Productos de: " + idInfCom);
+        
+        //Preparar Tipos de datos a trabajar
+        List<MediaType> acceptableMediaTypes = new ArrayList<MediaType>();
+        acceptableMediaTypes.add(MediaType.APPLICATION_XML);
+        
+        //Preparo el header
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(acceptableMediaTypes);
+        HttpEntity<Producto> entity = new HttpEntity<Producto>(headers);
+        
+        //Enviamos el request via GET
+        try{
+            ResponseEntity<ProductoList> result = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/productosF/{idInfCom}", 
+                    HttpMethod.GET, entity, ProductoList.class, idInfCom);
+            
+            // Agregamos al Model
+            model.addAttribute("productosGetAll", result.getBody().getData());
+        
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
+        // Esto es para enviar al JSP de WEB-INF/jsp/consultarPersonas.jsp
+        return "consultarProductos";
     }
 }

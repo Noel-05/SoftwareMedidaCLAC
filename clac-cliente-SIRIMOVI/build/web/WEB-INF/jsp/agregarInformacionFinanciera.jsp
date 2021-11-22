@@ -27,6 +27,7 @@
                 <div class="mb-3">
                     <form:label path="idinformacionOrganizacional" class="form-label">Negocio </form:label>
                     <form:select path="idinformacionOrganizacional" class="form-control" style="width: 30%;" required="true">
+                        <option value="">Seleccione el negocio...</option>
                         <c:forEach var="infOrg" items="${informacionOrganizacionalList}">
                             <form:option value="${infOrg.idInfOrganizacional}">${infOrg.nombreNegocio}</form:option>
                         </c:forEach>

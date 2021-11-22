@@ -32,6 +32,11 @@
                     <input path="correo" type="email" disabled class="form-control" style="width: 30%; text-align: center;" value="${informacionOrganizacionalGetId.nombreNegocio}"/>
                 </div>
                 
+                <div class="mb-3">
+                    <label path="correo" class="form-label"><strong>País del Negocio </strong></label>
+                    <input path="correo" type="email" disabled class="form-control" style="width: 30%; text-align: center;" value="${informacionOrganizacionalGetId.nombrePais}"/>
+                </div>
+                
                  <div class="mb-3">
                     <label path="nacio" class="form-label"><strong>Dirección del Negocio </strong></label>
                     <input path="nacio" type="text" disabled class="form-control" style="width: 30%; text-align: center;" value="${informacionOrganizacionalGetId.direccionNegocio}"/>
