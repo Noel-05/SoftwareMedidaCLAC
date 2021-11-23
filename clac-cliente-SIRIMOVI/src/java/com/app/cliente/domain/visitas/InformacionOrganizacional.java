@@ -18,6 +18,7 @@ public class InformacionOrganizacional {
     int cantEmpleados;
     String direccionNegocio;
     int cantSucursales;
+    String archivo;
     
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -103,9 +104,17 @@ public class InformacionOrganizacional {
         this.nombrePais = nombrePais;
     }
     
+    public String getArchivo() {
+        return archivo;
+    }
+
+    public void setArchivo(String archivo) {
+        this.archivo = archivo;
+    }
+    
     @Override
     public String toString() {
-        return "InformacionOrganizacional{" + "idInfOrganizacional=" + idInfOrganizacional + ", idRubro=" + idRubro + ", nombreNegocio=" + nombreNegocio + ", cantEmpleados=" + cantEmpleados + ", direccionNegocio=" + direccionNegocio + ", cantSucursales=" + cantSucursales + '}';
+        return "InformacionOrganizacional{" + "idInfOrganizacional=" + idInfOrganizacional + ", idRubro=" + idRubro + ", nombreNegocio=" + nombreNegocio + ", cantEmpleados=" + cantEmpleados + ", direccionNegocio=" + direccionNegocio + ", cantSucursales=" + cantSucursales +"\nArchivo: "+archivo+ '}';
     }
     
 }

@@ -18,6 +18,7 @@ public class ProductoRowMapper2 implements RowMapper<Producto>{
         produ.setNombre(rs.getString("nombreProducto"));
         produ.setPrecioVenta(rs.getFloat("precioVenta"));
         produ.setPrecioFabricacion(rs.getFloat("precioFabricacion"));
+        produ.setArchivo(rs.getString("archivoProducto"));
         
         return produ;
     }

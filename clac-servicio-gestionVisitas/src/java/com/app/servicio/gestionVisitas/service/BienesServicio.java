@@ -50,9 +50,9 @@ public class BienesServicio {
         System.out.println("Insertando nuevo bien.");
         
         try{
-            String sql = "INSERT INTO registro.bienes(idInformacionFinanciera, nombreBien, cantidadBien) VALUES(?, ?, ?)";
+            String sql = "INSERT INTO registro.bienes(idInformacionFinanciera, nombreBien, cantidadBien, archivoBienes) VALUES(?, ?, ?, ?)";
             
-            this.jdbcTemplate.update(sql, bienes.getIdInformacionFinanciera(), bienes.getNombreBien(), bienes.getCantidadBien());
+            this.jdbcTemplate.update(sql, bienes.getIdInformacionFinanciera(), bienes.getNombreBien(), bienes.getCantidadBien(), bienes.getArchivo());
             
             System.out.println("Bien Insertado Correctamente. ");
             

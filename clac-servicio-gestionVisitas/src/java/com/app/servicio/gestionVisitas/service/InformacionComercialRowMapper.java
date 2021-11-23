@@ -17,6 +17,7 @@ public class InformacionComercialRowMapper implements RowMapper<InformacionComer
         infCom.setDepartamentosDeComercioInterior(rs.getString("departamentosDeComercioInterior"));
         infCom.setPaisesDeComercioExterior(rs.getString("paisesDeComercioExterior"));
         infCom.setEmpresasSocias(rs.getString("empresasSocias"));
+        infCom.setArchivo(rs.getString("archivoInformacionComercial"));
         
         return infCom;
     }

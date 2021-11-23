@@ -49,9 +49,9 @@ public class InformacionComercialServicio {
         System.out.println("Insertando nueva Informacion Comercial.");
         
         try{
-            String sql = "INSERT INTO registro.informacioncomercial(idInformacionOrganizacional, departamentosDeComercioInterior, paisesDeComercioExterior, empresasSocias) VALUES(?, ?, ?, ?)";
+            String sql = "INSERT INTO registro.informacioncomercial(idInformacionOrganizacional, departamentosDeComercioInterior, paisesDeComercioExterior, empresasSocias, archivoInformacionComercial) VALUES(?, ?, ?, ?, ?)";
             
-            this.jdbcTemplate.update(sql, informacionComercial.getIdInformacionOrganizacional(), informacionComercial.getDepartamentosDeComercioInterior(), informacionComercial.getPaisesDeComercioExterior(), informacionComercial.getEmpresasSocias());
+            this.jdbcTemplate.update(sql, informacionComercial.getIdInformacionOrganizacional(), informacionComercial.getDepartamentosDeComercioInterior(), informacionComercial.getPaisesDeComercioExterior(), informacionComercial.getEmpresasSocias(), informacionComercial.getArchivo());
             
             System.out.println("Informacion Comercial Insertada Correctamente. ");
             

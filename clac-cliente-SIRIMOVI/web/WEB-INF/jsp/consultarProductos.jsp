@@ -49,6 +49,7 @@
                                 <th class="text-center" style="color:red"><strong> Nombre Producto</strong></th>
                                 <th class="text-center" style="color:red"><strong> Precio Venta </strong></th>
                                 <th class="text-center" style="color:red"><strong> Precio Fabricacion </strong></th>
+                                <th class="text-center" style="color:red"><strong> Archivo </strong></th>
                                 <th class="text-center" style="color:red"><strong> Acciones </strong></th>
                             </tr>
                         </thead>
@@ -58,12 +59,14 @@
                                 <c:url var="editUrl" value="/updateProducto?id=${producto.id}" />
                                 <c:url var="deleteUrl" value="/deleteProducto?id=${producto.id}" />
                                 <c:url var="getUrl" value="/getProducto?id=${producto.id}" />
+                                <c:url var="descarga" value="/descarga?archivo=${producto.archivo}" />
                                 
                                 <tr>
                                     <td><c:out value="${producto.nombreNegocio}" /></td>
                                     <td><c:out value="${producto.nombre}" /></td>
                                     <td>$ <c:out value="${producto.precioVenta}" /></td>
                                     <td>$ <c:out value="${producto.precioFabricacion}" /></td>
+                                    <td><c:out value="${producto.archivo}" /></td>
                                     <td>
                                         <a href="${editUrl}" class="btn btn-warning btn-sm" title="Editar Producto"> 
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -81,6 +84,12 @@
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-list" viewBox="0 0 16 16">
                                                 <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                 <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+                                            </svg>
+                                        </a>
+                                            
+                                            <a href="${descarga}" class="btn btn-primary btn-sm" title="Descargar archivos">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="10"/>
+                                                <path d="M16 12l-4 4-4-4M12 8v7"/>
                                             </svg>
                                         </a>
                                     </td>

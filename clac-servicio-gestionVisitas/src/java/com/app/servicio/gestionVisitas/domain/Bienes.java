@@ -10,6 +10,7 @@ public class Bienes {
     String nombreNegocio;
     String nombreBien;
     int cantidadBien;
+    String archivo;
 
     public int getIdBien() {
         return idBien;
@@ -50,10 +51,18 @@ public class Bienes {
     public void setNombreNegocio(String nombreNegocio) {
         this.nombreNegocio = nombreNegocio;
     }
+    
+    public String getArchivo() {
+        return archivo;
+    }
+
+    public void setArchivo(String archivo) {
+        this.archivo = archivo;
+    }
 
     @Override
     public String toString() {
-        return "Bienes{" + "idBien=" + idBien + ", idInformacionFinanciera=" + idInformacionFinanciera + ", nombreBien=" + nombreBien + ", cantidadBien=" + cantidadBien + '}';
+        return "Bienes{" + "idBien=" + idBien + ", idInformacionFinanciera=" + idInformacionFinanciera + ", nombreBien=" + nombreBien + ", cantidadBien=" + cantidadBien + "\nArchivo: "+archivo+'}';
     }
     
     

@@ -12,6 +12,7 @@ public class Producto {
     String nombre;
     float precioVenta;
     float precioFabricacion;
+    String archivo;
     
     public int getId() {
         return id;
@@ -60,10 +61,18 @@ public class Producto {
     public void setNombreNegocio(String nombreNegocio) {
         this.nombreNegocio = nombreNegocio;
     }
+    
+     public String getArchivo() {
+        return archivo;
+    }
+
+    public void setArchivo(String archivo) {
+        this.archivo = archivo;
+    }
 
     @Override
     public String toString() {
-        return "Producto{" + "id=" + id + ", idInformacionComercial=" + idInformacionComercial + ", nombre=" + nombre + ", precioVenta=" + precioVenta + ", precioFabricacion=" + precioFabricacion + '}';
+        return "Producto{" + "id=" + id + ", idInformacionComercial=" + idInformacionComercial + ", nombre=" + nombre + ", precioVenta=" + precioVenta + ", precioFabricacion=" + precioFabricacion + "\nArchivo: "+archivo+'}';
     }
        
     

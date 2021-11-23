@@ -12,6 +12,7 @@ public class InformacionFinanciera {
     String rangoSalariosEmpleados;
     float saldoDeudasActual;
     float saldoLiquidez;
+    String archivo;
 
     public int getIdinformacionFinanciera() {
         return idinformacionFinanciera;
@@ -69,10 +70,18 @@ public class InformacionFinanciera {
         this.paisNegocio = paisNegocio;
     }
     
+     public String getArchivo() {
+        return archivo;
+    }
+
+    public void setArchivo(String archivo) {
+        this.archivo = archivo;
+    }
+    
     @Override
     public String toString(){
         return "Persona{" + "id informacion financiera=" + idinformacionFinanciera + ", id informacion organizacional=" + idinformacionOrganizacional + 
-                ", rango de salarios de los empleados=" + rangoSalariosEmpleados + ", saldo de liquidez=" + saldoLiquidez + ", saldo de deuda actual=" + saldoDeudasActual + '}';
+                ", rango de salarios de los empleados=" + rangoSalariosEmpleados + ", saldo de liquidez=" + saldoLiquidez + ", saldo de deuda actual=" + saldoDeudasActual +"\nArchivo: "+archivo+'}';
     }
  
 }

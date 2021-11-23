@@ -16,6 +16,7 @@ public class BienesRowMapper implements RowMapper<Bienes>{
         bienes.setIdInformacionFinanciera(rs.getInt("idInformacionFinanciera"));
         bienes.setNombreBien(rs.getString("nombreBien"));
         bienes.setCantidadBien(rs.getInt("cantidadBien"));
+        bienes.setArchivo(rs.getString("archivoBienes"));
         
         return bienes;
     }

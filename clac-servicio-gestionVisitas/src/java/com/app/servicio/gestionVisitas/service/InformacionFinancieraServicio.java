@@ -41,9 +41,9 @@ public class InformacionFinancieraServicio {
         System.out.println("Insertando nueva Informacion Financiera.");
         
         try{
-            String sql = "INSERT INTO registro.informacionfinanciera(idInformacionOrganizacional, rangoSalarioEmpleados, saldoDeudasActual, saldoLiquidez) VALUES(?, ?, ?, ?)";
+            String sql = "INSERT INTO registro.informacionfinanciera(idInformacionOrganizacional, rangoSalarioEmpleados, saldoDeudasActual, saldoLiquidez, archivoInformacionFinanciera) VALUES(?, ?, ?, ?, ?)";
             
-            this.jdbcTemplate.update(sql, informacion.getIdinformacionOrganizacional(), informacion.getRangoSalariosEmpleados(), informacion.getSaldoDeudasActual(), informacion.getSaldoLiquidez());
+            this.jdbcTemplate.update(sql, informacion.getIdinformacionOrganizacional(), informacion.getRangoSalariosEmpleados(), informacion.getSaldoDeudasActual(), informacion.getSaldoLiquidez(), informacion.getArchivo());
             
             System.out.println("Informacion Financiera Insertada Correctamente. ");
             

@@ -3,11 +3,19 @@ package com.app.cliente.controller;
 
 import com.app.cliente.domain.visitas.InformacionComercial;
 import com.app.cliente.domain.visitas.InformacionComercialList;
-import com.app.cliente.domain.visitas.InformacionOrganizacional;
 import com.app.cliente.domain.visitas.Producto;
 import com.app.cliente.domain.visitas.ProductoList;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URLConnection;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -15,11 +23,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -124,7 +134,7 @@ public class ProductoController {
     // CREAR
     // Envíamos el registro y una solicitud de actualización por el metodo GET basados en la información que se envía en submit
     @RequestMapping(value = "/addProducto", method = RequestMethod.POST)
-    public String addProducto(@ModelAttribute("productoAttribute") Producto producto, Model model) {
+    public String addProducto(@ModelAttribute("productoAttribute") Producto producto, Model model, @RequestParam("doc") MultipartFile file) {
         System.out.println("--> Agregar un nuevo Producto.");
 
         //Preparar Tipos de datos a trabajar
@@ -135,6 +145,20 @@ public class ProductoController {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(acceptableMediaTypes);
         HttpEntity<Producto> entity = new HttpEntity<Producto>(producto, headers);
+        
+        //Se valida si el archivo recibido no esta vacio
+        if (!file.isEmpty()) {
+            LocalDate fecha = LocalDate.now();
+            String identificacion = producto.getIdInformacionComercial() + "/" + fecha + "/";
+            String ruta = "c:/Archivos/Producto/" + identificacion;
+            System.out.println("--->" + ruta);
+            //Se invoca al metodo para guardar el archivo localmente
+            String nombreArchivo = guardarAchivo(file, ruta);
+            if (nombreArchivo != null) {
+                String path = ruta + nombreArchivo;
+                producto.setArchivo(path);
+            }
+        }
 
         // Enviamos el Request via POST
         try {
@@ -149,6 +173,19 @@ public class ProductoController {
         return "redirect:/getallProducto";
     }
     
+    //Metodo para guardar el archivo localmente
+    public static String guardarAchivo(MultipartFile file, String ruta) {
+        //Se obtiene el nombre original del archivo
+        String nombreOriginal = file.getOriginalFilename();
+        try {
+            //Se hace la creacion del objeto y se almacena
+            File archivoFile = new File(ruta + nombreOriginal);
+            file.transferTo(archivoFile);
+            return nombreOriginal;
+        } catch (IOException e) {
+            return null;
+        }
+    }
     
     // EDITAR
     // Mostrar y Recuperar los datos del producto a editar en el JSP
@@ -266,4 +303,24 @@ public class ProductoController {
         // Esto es para enviar al JSP de WEB-INF/jsp/consultarPersonas.jsp
         return "consultarProductos";
     }
+    
+    //Metodo para descargar archivos
+   /*@RequestMapping(value = "/descarga", method = RequestMethod.GET)
+    public void descargar(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        //Path del archivo
+        File file = new File(request.getParameter("archivo"));
+        
+        InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+        String mimeType = URLConnection.guessContentTypeFromStream(inputStream);
+        
+        if(mimeType == null){
+            mimeType = "application/octet-stream";
+        }
+        
+        response.setContentType(mimeType);
+        response.setContentLength((int) file.length());
+        response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
+        
+        FileCopyUtils.copy(inputStream, response.getOutputStream());
+    }*/
 }

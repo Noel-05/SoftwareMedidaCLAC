@@ -3,9 +3,11 @@ package com.app.cliente.controller;
 
 import com.app.cliente.domain.visitas.InformacionComercial;
 import com.app.cliente.domain.visitas.InformacionComercialList;
-import com.app.cliente.domain.visitas.InformacionFinanciera;
 import com.app.cliente.domain.visitas.InformacionOrganizacional;
 import com.app.cliente.domain.visitas.InformacionOrganizacionalList;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.http.HttpEntity;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -124,7 +127,7 @@ public class InformacionComercialController {
     // CREAR
     // Envíamos el registro y una solicitud de actualización por el metodo GET basados en la información que se envía en submit
     @RequestMapping(value = "/addInformacionComercial", method = RequestMethod.POST)
-    public String addInformacionComercial(@ModelAttribute("informacionComercialAttribute") InformacionComercial infComercial, Model model) {
+    public String addInformacionComercial(@ModelAttribute("informacionComercialAttribute") InformacionComercial infComercial, Model model, @RequestParam("doc") MultipartFile file) {
         System.out.println("--> Agregar una nueva Informacion Comercial.");
 
         //Preparar Tipos de datos a trabajar
@@ -135,6 +138,20 @@ public class InformacionComercialController {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(acceptableMediaTypes);
         HttpEntity<InformacionComercial> entity = new HttpEntity<InformacionComercial>(infComercial, headers);
+        
+         //Se valida si el archivo recibido no esta vacio
+        if (!file.isEmpty()) {
+            LocalDate fecha = LocalDate.now();
+            String identificacion = infComercial.getIdInformacionOrganizacional() + "/" + fecha + "/";
+            String ruta = "c:/Archivos/InformacionComercial/" + identificacion;
+            System.out.println("--->" + ruta);
+            //Se invoca al metodo para guardar el archivo localmente
+            String nombreArchivo = guardarAchivo(file, ruta);
+            if (nombreArchivo != null) {
+                String path = ruta + nombreArchivo;
+                infComercial.setArchivo(path);
+            }
+        }
 
         // Enviamos el Request via POST
         try {
@@ -149,6 +166,19 @@ public class InformacionComercialController {
         return "redirect:/getallInformacionComercial";
     }
     
+    //Metodo para guardar el archivo localmente
+    public static String guardarAchivo(MultipartFile file, String ruta) {
+        //Se obtiene el nombre original del archivo
+        String nombreOriginal = file.getOriginalFilename();
+        try {
+            //Se hace la creacion del objeto y se almacena
+            File archivoFile = new File(ruta + nombreOriginal);
+            file.transferTo(archivoFile);
+            return nombreOriginal;
+        } catch (IOException e) {
+            return null;
+        }
+    }
     
     // EDITAR
     // Mostrar y Recuperar los datos de la informacion comercial a editar en el JSP

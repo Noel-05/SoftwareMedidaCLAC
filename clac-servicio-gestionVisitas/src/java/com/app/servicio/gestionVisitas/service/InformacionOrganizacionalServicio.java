@@ -54,12 +54,12 @@ public class InformacionOrganizacionalServicio {
         cal.add(Calendar.DAY_OF_YEAR, 1);
         
         try{
-            String sql = "INSERT INTO registro.informacionorganizacional(idRubro, nombreNegocio, cantidadEmpleados, direccionNegocio, cantidadSucursales, fechaRegistroVisita, idPais) "
-                    + "VALUES(?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO registro.informacionorganizacional(idRubro, nombreNegocio, cantidadEmpleados, direccionNegocio, cantidadSucursales, fechaRegistroVisita, idPais, archivoInformacionOrganizacional) "
+                    + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
             
             this.jdbcTemplate.update(sql, informacionOrganizacional.getIdRubro(), informacionOrganizacional.getNombreNegocio(), 
                     informacionOrganizacional.getCantEmpleados(), informacionOrganizacional.getDireccionNegocio(), 
-                    informacionOrganizacional.getCantSucursales(), cal, informacionOrganizacional.getIdPais());
+                    informacionOrganizacional.getCantSucursales(), cal, informacionOrganizacional.getIdPais(), informacionOrganizacional.getArchivo());
             
             System.out.println("Información Organizacional Insertada Correctamente. ");
             
