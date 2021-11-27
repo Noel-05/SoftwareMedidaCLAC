@@ -75,4 +75,21 @@ public class MonitoreoController {
         
         return monitoreoServicio.delete(id).toString();
     }
+    
+    
+    // FILTRAR
+    // Metodo para recuperar todas las personas de la BD
+    @RequestMapping(value="/filtrarMonitoreo/{idPais}", method=RequestMethod.GET, headers="Accept=application/json, application/xml")
+    private @ResponseBody MonitoreoList searchMonitoreoById(@PathVariable("idPais") int idPais){
+        
+        System.out.println("********"+idPais);
+        
+        MonitoreoList result = new MonitoreoList();
+        
+        result.setData(monitoreoServicio.searchByID(idPais));
+        
+        System.out.println(result);
+        
+        return result;
+    }
 }

@@ -113,4 +113,18 @@ public class MonitoreoServicio {
             return false;
         }
     }
+    
+    
+    // FILTRAR POR GET
+    public List<Monitoreo> searchByID(int idPais){
+        System.out.println("Recuperando todos los datos de monitoreos de la BD.");
+        
+        String sql = "SELECT * FROM registro.monitoreos AS M INNER JOIN registro.informacionorganizacional AS INFORG ON M.idInformacionOrganizacional =  INFORG.idInformacionOrganizacional INNER JOIN registro.pais P ON P.idPais = INFORG.idPais WHERE INFORG.idPais = " + idPais;
+        
+        monitoreos = this.jdbcTemplate.query(sql, new MonitoreoRowMapper2());
+        
+        System.out.println(monitoreos);
+        
+        return monitoreos;
+    }
 }

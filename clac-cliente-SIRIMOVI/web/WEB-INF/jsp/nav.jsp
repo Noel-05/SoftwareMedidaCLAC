@@ -41,7 +41,7 @@
                         
                         <a class="nav-link" href="${monitoreo}">Monitoreos</a>
                         
-                        <li class="nav-item dropdown">
+<!--                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="${getPerson}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Personas
                             </a>
@@ -50,7 +50,7 @@
                                 <li><a class="dropdown-item" href="${prueba}">Prueba Personas</a></li>
                                 <li><hr class="dropdown-divider"></li>
                             </ul>
-                        </li>
+                        </li>-->
                     
                     </div>
                 </div>

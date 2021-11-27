@@ -7,6 +7,8 @@ import com.app.cliente.domain.visitas.InformacionOrganizacional;
 import com.app.cliente.domain.visitas.InformacionOrganizacionalList;
 import com.app.cliente.domain.monitoreos.Monitoreo;
 import com.app.cliente.domain.monitoreos.MonitoreoList;
+import com.app.cliente.domain.visitas.Pais;
+import com.app.cliente.domain.visitas.PaisList;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.http.HttpEntity;
@@ -43,13 +45,20 @@ public class MonitoreoController {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(acceptableMediaTypes);
         HttpEntity<Monitoreo> entity = new HttpEntity<Monitoreo>(headers);
+        HttpEntity<Pais> entity2 = new HttpEntity<Pais>(headers);
         
         //Enviamos el request via GET
         try{
             ResponseEntity<MonitoreoList> result = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionMonitoreos/getallMonitoreos", 
                     HttpMethod.GET, entity, MonitoreoList.class);
+            
+            ResponseEntity<PaisList> result2 = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/paises", 
+                    HttpMethod.GET, entity2, PaisList.class);
+            
             // Agregamos al Model
+            model.addAttribute("paisList", result2.getBody().getData());
             model.addAttribute("monitoreosGetAll", result.getBody().getData());
+            model.addAttribute("empresas");
         
         }catch(Exception e){
             System.out.println(e);
@@ -233,5 +242,56 @@ public class MonitoreoController {
 
         // Esto es para enviar al JSP de WEB-INF/jsp/consultarPersonas.jsp
         return "redirect:/getallMonitoreos";
+    }
+    
+    
+    
+    // FILTRAR
+    // Mostrar TODAS las personas en el JSP
+    @RequestMapping(value = "/filtrarMonitoreoGet", method = RequestMethod.POST)
+    public String searchMonitoreoById(@RequestParam("paisSel") int idPais, Model model) {
+        System.out.println("--> Recuperando monitoreos con idPais: " + idPais);
+
+        //Preparar Tipos de datos a trabajar
+        List<MediaType> acceptableMediaTypes = new ArrayList<MediaType>();
+        acceptableMediaTypes.add(MediaType.APPLICATION_XML);
+
+        //Preparo el header
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(acceptableMediaTypes);
+        HttpEntity<Monitoreo> entity = new HttpEntity<Monitoreo>(headers);
+        HttpEntity<Pais> entity2 = new HttpEntity<Pais>(headers);
+        HttpEntity<InformacionOrganizacional> entity3 = new HttpEntity<InformacionOrganizacional>(headers);
+
+        // Enviamos el Request via GET
+        try {
+            if(idPais > 0){
+                ResponseEntity<MonitoreoList> result = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionMonitoreos/filtrarMonitoreo/{idPais}", 
+                        HttpMethod.GET, entity, MonitoreoList.class, idPais);
+                
+                ResponseEntity<InformacionOrganizacionalList> result3 = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/informacionOrganizacional", 
+                    HttpMethod.GET, entity3, InformacionOrganizacionalList.class);
+                
+                model.addAttribute("monitoreosGetAll", result.getBody().getData());
+            }else{
+                ResponseEntity<MonitoreoList> result = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionMonitoreos/getallMonitoreos", 
+                    HttpMethod.GET, entity, MonitoreoList.class);
+                
+                model.addAttribute("monitoreosGetAll", result.getBody().getData());
+            }
+            
+            ResponseEntity<PaisList> result2 = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/paises", 
+                    HttpMethod.GET, entity2, PaisList.class);
+            
+            // Agregamos al Model
+            model.addAttribute("paisList", result2.getBody().getData());
+            model.addAttribute("monitoreoAttribute", new Monitoreo());
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        // Esto es para enviar al JSP de WEB-INF/jsp/obtenerUsuario.jsp
+        return "consultarMonitoreo";
     }
 }

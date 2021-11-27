@@ -18,12 +18,31 @@
         </br>
         
         <c:url var="addUrl" value="/monitoreosAdd" />
+        <c:url var="filtrarUrl" value="/filtrarMonitoreoGet" />
+        <c:url var="filtrarUrl2" value="/filtrarMonitoreoGetEmp" />
         
         <h1 align="center">Consulta de Monitoreos</h1>
         </br>
         
         <hr size="4px" style="width:50%; margin: auto; color: black;" />
         </br>
+        
+        <div class="container mt-4" align="center">
+            <form method="POST" action="${filtrarUrl}">
+                <div class="mb-3">
+                    <div style="display: inline-block">
+                        <select class="form-control" style="width: 100%;" id="paisSel" required name="paisSel">
+                            <option value="">Seleccione el país a filtrar...</option>
+                            <option value="0" style="color: red;">TODOS</option>
+                            <c:forEach var="nomPa" items="${paisList}">
+                                <option value="${nomPa.idPais}">${nomPa.nombrePais}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="background-color: white; border-color: blue; color: blue;" >Filtrar</button>
+                </div>
+            </form>
+        </div>
         
         <p align="center"><a href="${addUrl}" class="btn btn-success"> Agregar </a></p>
         
