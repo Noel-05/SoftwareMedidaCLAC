@@ -17,6 +17,7 @@ public class MonitoreoRowMapper implements RowMapper<Monitoreo>{
         monitoreo.setTotalVentas(rs.getInt("totalVentas"));
         monitoreo.setGanancia(rs.getInt("ganancia"));
         monitoreo.setFechaRegistroMonitoreo(rs.getDate("fechaRegistroMonitoreo"));
+        monitoreo.setArchivo(rs.getString("archivoMonitoreo"));
         
         return monitoreo;
     }

@@ -13,6 +13,7 @@ public class InformacionComercial {
     String departamentosDeComercioInterior;
     String paisesDeComercioExterior;
     String empresasSocias;
+    String archivo;
 
     public int getIdInformacionComercial() {
         return idInformacionComercial;
@@ -70,8 +71,16 @@ public class InformacionComercial {
         this.paisNegocio = paisNegocio;
     }
     
+    public String getArchivo() {
+        return archivo;
+    }
+
+    public void setArchivo(String archivo) {
+        this.archivo = archivo;
+    }
+    
     @Override
     public String toString() {
-        return "Informacion Comercial{" + "id Comercial=" + idInformacionComercial + ", id Organizacional=" + idInformacionOrganizacional + ", Departamento de Comercio Interior=" + departamentosDeComercioInterior + ", Paises de Comercio Exterior=" + paisesDeComercioExterior+ ", Empresa Socias=" +empresasSocias + '}';
+        return "Informacion Comercial{" + "id Comercial=" + idInformacionComercial + ", id Organizacional=" + idInformacionOrganizacional + ", Departamento de Comercio Interior=" + departamentosDeComercioInterior + ", Paises de Comercio Exterior=" + paisesDeComercioExterior+ ", Empresa Socias=" +empresasSocias +"\nArchivo: "+archivo+'}';
     }
 }

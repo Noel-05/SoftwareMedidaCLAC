@@ -17,6 +17,7 @@ public class Monitoreo {
     int cantidadPerdidas;
     int totalVentas;
     int ganancia;
+    String archivo;
     
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -94,8 +95,16 @@ public class Monitoreo {
         this.nombrePais = nombrePais;
     }
     
+    public String getArchivo() {
+        return archivo;
+    }
+
+    public void setArchivo(String archivo) {
+        this.archivo = archivo;
+    }
+    
     @Override
     public String toString() {
-        return "Monitoreo:" + "\nid Monitoreo: " + idMonitoreo + "\nId Informacion: " + idInfo + "\nCantidad de Produccion: " + cantidadProduccion + "\nCantidad de perdidas:" + cantidadPerdidas + "\nTotal de ventas: "+totalVentas+"\nGanancias: "+ganancia+'}';
+        return "Monitoreo:" + "\nid Monitoreo: " + idMonitoreo + "\nId Informacion: " + idInfo + "\nCantidad de Produccion: " + cantidadProduccion + "\nCantidad de perdidas:" + cantidadPerdidas + "\nTotal de ventas: "+totalVentas+"\nGanancias: "+ganancia+"\nArchivo: "+archivo+'}';
     }
 }

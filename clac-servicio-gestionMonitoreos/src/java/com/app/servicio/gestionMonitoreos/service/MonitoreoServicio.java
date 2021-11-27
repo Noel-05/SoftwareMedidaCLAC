@@ -53,9 +53,9 @@ public class MonitoreoServicio {
         cal.add(Calendar.DAY_OF_YEAR, 1);
         
         try{
-            String sql = "INSERT INTO registro.monitoreos(idInformacionOrganizacional, cantidadProduccion, cantidadPerdidas, totalVentas, ganancia, fechaRegistroMonitoreo) VALUES(?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO registro.monitoreos(idInformacionOrganizacional, cantidadProduccion, cantidadPerdidas, totalVentas, ganancia, fechaRegistroMonitoreo, archivoMonitoreo) VALUES(?, ?, ?, ?, ?, ?, ?)";
             
-            this.jdbcTemplate.update(sql, monitoreo.getIdInfo(), monitoreo.getCantidadProduccion(), monitoreo.getCantidadPerdidas(), monitoreo.getTotalVentas(), monitoreo.getGanancia(), cal);
+            this.jdbcTemplate.update(sql, monitoreo.getIdInfo(), monitoreo.getCantidadProduccion(), monitoreo.getCantidadPerdidas(), monitoreo.getTotalVentas(), monitoreo.getGanancia(),cal,monitoreo.getArchivo());
             
             System.out.println("Monitoreo Insertada Correctamente. ");
             
@@ -78,9 +78,9 @@ public class MonitoreoServicio {
         cal.add(Calendar.DAY_OF_YEAR, 1);
         
         try{
-            String sql = "UPDATE registro.monitoreos SET idInformacionOrganizacional=?, cantidadProduccion=?, cantidadPerdidas=?, totalVentas=?, ganancia=?, fechaRegistroMonitoreo=? WHERE idMonitoreo = ?";
+            String sql = "UPDATE registro.monitoreos SET idInformacionOrganizacional=?, cantidadProduccion=?, cantidadPerdidas=?, totalVentas=?, ganancia=?, fechaRegistroMonitoreo=?, archivoMonitoreo=? WHERE idMonitoreo = ?";
             
-            this.jdbcTemplate.update(sql, monitoreo.getIdInfo(), monitoreo.getCantidadProduccion(), monitoreo.getCantidadPerdidas(),monitoreo.getTotalVentas(),monitoreo.getGanancia(), cal, monitoreo.getIdMonitoreo());
+            this.jdbcTemplate.update(sql, monitoreo.getIdInfo(), monitoreo.getCantidadProduccion(), monitoreo.getCantidadPerdidas(),monitoreo.getTotalVentas(),monitoreo.getGanancia(), cal, monitoreo.getArchivo(), monitoreo.getIdMonitoreo());
             
             System.out.println("Monitoreo Actualizado Correctamente.");
             

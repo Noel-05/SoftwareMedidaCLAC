@@ -52,6 +52,11 @@
                     <input path="saldoLiquidez" type="text" disabled class="form-control" style="width: 30%; text-align: center;" value="${informacionComercialGetId.empresasSocias}"/>
                 </div>
                 
+                <div class="mb-3">
+                    <label path="archivo" class="form-label"><strong>Archivo Asociado </strong></label>
+                    <input path="archivo" type="text" disabled class="form-control" style="width: 30%; text-align: center;" value="${informacionComercialGetId.archivo}"/>
+                </div>
+                
             </c:if>
                 
             <p align="center"><a href="${getInformacionComercial}" class="btn btn-danger">Regresar</a></p>

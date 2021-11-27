@@ -18,6 +18,7 @@ public class InformacionFinancieraRowMapper implements RowMapper<InformacionFina
         info.setRangoSalariosEmpleados(rs.getString("rangoSalarioEmpleados"));
         info.setSaldoDeudasActual(rs.getFloat("saldoDeudasActual"));
         info.setSaldoLiquidez(rs.getFloat("saldoLiquidez"));
+        info.setArchivo(rs.getString("archivoInformacionFinanciera"));
         
         return info;
     } 

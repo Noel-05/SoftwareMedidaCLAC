@@ -58,6 +58,7 @@
                                 <c:url var="editUrl" value="/updateProducto?id=${producto.id}" />
                                 <c:url var="deleteUrl" value="/deleteProducto?id=${producto.id}" />
                                 <c:url var="getUrl" value="/getProducto?id=${producto.id}" />
+                                <c:url var="descarga" value="/descarga?archivo=${producto.archivo}" />
                                 
                                 <tr>
                                     <td><c:out value="${producto.nombreNegocio}" /></td>
@@ -83,6 +84,15 @@
                                                 <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
                                             </svg>
                                         </a>
+                                            
+                                        <c:if test="${producto.archivo.equals('no archivo') == false}">
+                                            <a href="${descarga}" class="btn btn-primary btn-sm" title="Descargar archivos">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="10"/>
+                                                    <path d="M16 12l-4 4-4-4M12 8v7"/>
+                                                </svg>
+                                            </a>
+                                        </c:if>
+                                            
                                     </td>
                                 </tr>
                                 

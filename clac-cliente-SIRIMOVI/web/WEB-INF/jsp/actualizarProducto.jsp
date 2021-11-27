@@ -23,7 +23,7 @@
         <c:url var="getProducto" value="/getallProducto" />
         
         <div class="container mt-4" align="center">
-            <form:form modelAttribute="productoAttribute" method="POST" action="${saveUrl}">
+            <form:form modelAttribute="productoAttribute" method="POST" action="${saveUrl}" enctype="multipart/form-data">
                 <div class="mb-3">
                     <form:label path="idInformacionComercial" class="form-label">Negocio </form:label>
                     <form:select path="idInformacionComercial" class="form-control" style="width: 30%;" required="true">
@@ -46,6 +46,16 @@
                 <div class="mb-3">
                     <form:label path="precioFabricacion" class="form-label">Precio Fabricacion: </form:label>
                     <form:input path="precioFabricacion" required="true" type="number" step= "0.01" class="form-control" aria-describedby="emailHelp" style="width: 30%;"/>
+                </div>
+                
+                <div class="mb-3">
+                    <form:label path="archivo" class="form-label">Archivo Anterior: </form:label>
+                    <input name="archivo" type="text" readonly required="false" class="form-control" aria-describedby="emailHelp" style="width: 30%;" value="${productoAttribute.archivo}"/>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Archivo Nuevo: </label>
+                    <input id="doc" name="doc" required="false" type="file" class="form-control" style="width: 30%;"/>
                 </div>
                 
                 <button type="submit" class="btn btn-primary">Guardar</button>

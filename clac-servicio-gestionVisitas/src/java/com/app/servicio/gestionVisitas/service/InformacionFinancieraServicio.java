@@ -41,9 +41,9 @@ public class InformacionFinancieraServicio {
         System.out.println("Insertando nueva Informacion Financiera.");
         
         try{
-            String sql = "INSERT INTO registro.informacionfinanciera(idInformacionOrganizacional, rangoSalarioEmpleados, saldoDeudasActual, saldoLiquidez) VALUES(?, ?, ?, ?)";
+            String sql = "INSERT INTO registro.informacionfinanciera(idInformacionOrganizacional, rangoSalarioEmpleados, saldoDeudasActual, saldoLiquidez, archivoInformacionFinanciera) VALUES(?, ?, ?, ?, ?)";
             
-            this.jdbcTemplate.update(sql, informacion.getIdinformacionOrganizacional(), informacion.getRangoSalariosEmpleados(), informacion.getSaldoDeudasActual(), informacion.getSaldoLiquidez());
+            this.jdbcTemplate.update(sql, informacion.getIdinformacionOrganizacional(), informacion.getRangoSalariosEmpleados(), informacion.getSaldoDeudasActual(), informacion.getSaldoLiquidez(), informacion.getArchivo());
             
             System.out.println("Informacion Financiera Insertada Correctamente. ");
             
@@ -61,10 +61,11 @@ public class InformacionFinancieraServicio {
         System.out.println("Editando Informacion Financiera con ID: " + infof.getIdinformacionFinanciera());
         
         try{
-            String sql = "UPDATE registro.informacionfinanciera SET idInformacionOrganizacional=?, rangoSalarioEmpleados=?, saldoDeudasActual=?, saldoLiquidez=? WHERE idInformacionFinanciera = ?";
+            String sql = "UPDATE registro.informacionfinanciera SET idInformacionOrganizacional=?, rangoSalarioEmpleados=?, saldoDeudasActual=?, saldoLiquidez=?, archivoInformacionFinanciera=?"
+                    + " WHERE idInformacionFinanciera = ?";
             
             this.jdbcTemplate.update(sql, infof.getIdinformacionOrganizacional(), infof.getRangoSalariosEmpleados(), infof.getSaldoDeudasActual(),
-                     infof.getSaldoLiquidez(), infof.getIdinformacionFinanciera());
+                     infof.getSaldoLiquidez(), infof.getArchivo(), infof.getIdinformacionFinanciera());
             
             System.out.println("Informacion Financiera Actualizada Correctamente.");
             

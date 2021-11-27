@@ -17,6 +17,7 @@ public class BienesRowMapper2 implements RowMapper<Bienes>{
         bienes.setNombreNegocio(rs.getString("nombreNegocio"));
         bienes.setNombreBien(rs.getString("nombreBien"));
         bienes.setCantidadBien(rs.getInt("cantidadBien"));
+        bienes.setArchivo(rs.getString("archivoBienes"));
         
         return bienes;
     }
