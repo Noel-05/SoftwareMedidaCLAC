@@ -49,7 +49,6 @@
                                 <th class="text-center" style="color:red"><strong> Nombre Producto</strong></th>
                                 <th class="text-center" style="color:red"><strong> Precio Venta </strong></th>
                                 <th class="text-center" style="color:red"><strong> Precio Fabricacion </strong></th>
-                                <th class="text-center" style="color:red"><strong> Archivo </strong></th>
                                 <th class="text-center" style="color:red"><strong> Acciones </strong></th>
                             </tr>
                         </thead>
@@ -66,7 +65,6 @@
                                     <td><c:out value="${producto.nombre}" /></td>
                                     <td>$ <c:out value="${producto.precioVenta}" /></td>
                                     <td>$ <c:out value="${producto.precioFabricacion}" /></td>
-                                    <td><c:out value="${producto.archivo}" /></td>
                                     <td>
                                         <a href="${editUrl}" class="btn btn-warning btn-sm" title="Editar Producto"> 
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -87,11 +85,14 @@
                                             </svg>
                                         </a>
                                             
+                                        <c:if test="${producto.archivo.equals('no archivo') == false}">
                                             <a href="${descarga}" class="btn btn-primary btn-sm" title="Descargar archivos">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="10"/>
-                                                <path d="M16 12l-4 4-4-4M12 8v7"/>
-                                            </svg>
-                                        </a>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="10"/>
+                                                    <path d="M16 12l-4 4-4-4M12 8v7"/>
+                                                </svg>
+                                            </a>
+                                        </c:if>
+                                            
                                     </td>
                                 </tr>
                                 

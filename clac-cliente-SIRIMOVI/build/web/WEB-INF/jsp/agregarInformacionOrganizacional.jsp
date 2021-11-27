@@ -72,7 +72,7 @@
                     <form:input path="fechaRegistroVisita" type="date" required="true" class="form-control" aria-describedby="emailHelp" style="width: 30%;"/>
                 </div>
                 
-                 <div class="mb-3" style="display: none;">
+                <div class="mb-3" style="display: none;">
                     <form:label path="archivo" class="form-label">archivo: </form:label>
                     <form:input path="archivo" type="text" required="false" class="form-control" aria-describedby="emailHelp" style="width: 30%;" value="no archivo"/>
                 </div>

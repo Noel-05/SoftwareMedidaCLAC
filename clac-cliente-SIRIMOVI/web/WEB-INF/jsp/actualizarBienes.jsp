@@ -23,7 +23,7 @@
         <c:url var="getBienes" value="/getallBienes" />
         
         <div class="container mt-4" align="center">
-            <form:form modelAttribute="bienesAttribute" method="POST" action="${saveUrl}">
+            <form:form modelAttribute="bienesAttribute" method="POST" action="${saveUrl}" enctype="multipart/form-data">
                 <div class="mb-3">
                     <form:label path="idInformacionFinanciera" class="form-label">Negocio </form:label>
                     <form:select path="idInformacionFinanciera" class="form-control" style="width: 30%;" required="true">
@@ -41,6 +41,16 @@
                 <div class="mb-3">
                     <form:label path="cantidadBien" class="form-label">Cantidad Bien </form:label>
                     <form:input path="cantidadBien" required="true" type="number" class="form-control" aria-describedby="emailHelp" style="width: 30%;"/>
+                </div>
+                
+                <div class="mb-3">
+                    <form:label path="archivo" class="form-label">Archivo Anterior: </form:label>
+                    <input name="archivo" type="text" readonly required="false" class="form-control" aria-describedby="emailHelp" style="width: 30%;" value="${bienesAttribute.archivo}"/>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Archivo Nuevo: </label>
+                    <input id="doc" name="doc" required="false" type="file" class="form-control" style="width: 30%;"/>
                 </div>
                     
                 <button type="submit" class="btn btn-primary">Guardar</button>

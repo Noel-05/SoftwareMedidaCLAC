@@ -23,7 +23,7 @@
         <c:url var="getInfFin" value="/getAllInformacionFinanciera" />
         
         <div class="container mt-4" align="center">
-            <form:form modelAttribute="inforAttribute" method="POST" action="${saveUrl}">
+            <form:form modelAttribute="inforAttribute" method="POST" action="${saveUrl}" enctype="multipart/form-data">
                 <div class="mb-3">
                     <form:label path="idinformacionOrganizacional" class="form-label">Negocio </form:label>
                     <form:select path="idinformacionOrganizacional" class="form-control" style="width: 30%;" required="true">
@@ -47,6 +47,16 @@
                 <div class="mb-3">
                     <form:label path="saldoLiquidez" class="form-label">Saldo de Liquidez Actual</form:label>
                     <form:input path="saldoLiquidez" required="true" type="number" step= "0.01" class="form-control" aria-describedby="emailHelp" style="width: 30%;"/>
+                </div>
+                
+                <div class="mb-3">
+                    <form:label path="archivo" class="form-label">Archivo Anterior: </form:label>
+                    <input name="archivo" type="text" readonly required="false" class="form-control" aria-describedby="emailHelp" style="width: 30%;" value="${inforAttribute.archivo}"/>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Archivo Nuevo: </label>
+                    <input id="doc" name="doc" required="false" type="file" class="form-control" style="width: 30%;"/>
                 </div>
                     
                 <button type="submit" class="btn btn-primary">Guardar</button>

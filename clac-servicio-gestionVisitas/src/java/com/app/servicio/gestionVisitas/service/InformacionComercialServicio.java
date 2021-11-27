@@ -70,9 +70,11 @@ public class InformacionComercialServicio {
         System.out.println("Editando Informacion Comercial con ID: " + informacionComercial.getIdInformacionComercial());
         
         try{
-            String sql = "UPDATE registro.informacioncomercial SET idInformacionOrganizacional=?, departamentosDeComercioInterior=?, paisesDeComercioExterior=?, empresasSocias=? WHERE idInformacionComercial = ?";
+            String sql = "UPDATE registro.informacioncomercial SET idInformacionOrganizacional=?, departamentosDeComercioInterior=?, paisesDeComercioExterior=?, empresasSocias=?, archivoInformacionComercial=?  "
+                    + "WHERE idInformacionComercial = ?";
             
-            this.jdbcTemplate.update(sql, informacionComercial.getIdInformacionOrganizacional(), informacionComercial.getDepartamentosDeComercioInterior(), informacionComercial.getPaisesDeComercioExterior(), informacionComercial.getEmpresasSocias(), informacionComercial.getIdInformacionComercial());
+            this.jdbcTemplate.update(sql, informacionComercial.getIdInformacionOrganizacional(), informacionComercial.getDepartamentosDeComercioInterior(), informacionComercial.getPaisesDeComercioExterior(), informacionComercial.getEmpresasSocias(),
+                    informacionComercial.getArchivo(), informacionComercial.getIdInformacionComercial());
             
             System.out.println("Persona Actualizada Correctamente.");
             

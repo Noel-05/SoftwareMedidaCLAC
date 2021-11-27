@@ -23,7 +23,7 @@
         <c:url var="getMonitoreo" value="/getallMonitoreos" />
         
         <div class="container mt-4" align="center">
-            <form:form modelAttribute="monitoreoAttribute" method="POST" action="${saveUrl}">
+            <form:form modelAttribute="monitoreoAttribute" method="POST" action="${saveUrl}" enctype="multipart/form-data">
                 
                 <div class="mb-3">
                     <form:label path="idInfo" class="form-label">Negocio </form:label>
@@ -57,6 +57,16 @@
                 <div class="mb-3">
                     <form:label path="fechaRegistroMonitoreo" class="form-label">Fecha: </form:label>
                     <form:input path="fechaRegistroMonitoreo" required="true" type="date" class="form-control" aria-describedby="emailHelp" style="width: 30%;"/>
+                </div>
+                
+                <div class="mb-3">
+                    <form:label path="archivo" class="form-label">Archivo Anterior: </form:label>
+                    <input name="archivo" type="text" readonly required="false" class="form-control" aria-describedby="emailHelp" style="width: 30%;" value="${monitoreoAttribute.archivo}"/>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Archivo Nuevo: </label>
+                    <input id="doc" name="doc" required="false" type="file" class="form-control" style="width: 30%;"/>
                 </div>
                     
                 <button type="submit" class="btn btn-primary">Guardar</button>

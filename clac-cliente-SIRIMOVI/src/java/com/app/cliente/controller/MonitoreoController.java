@@ -224,7 +224,7 @@ public class MonitoreoController {
     // Envíar una solicitud de actualización basados en la información enviada en el submit
     @RequestMapping(value = "/updateMonitoreo", method = RequestMethod.POST)
     public String updatePersonMonitoreo(@ModelAttribute("monitoreoAttribute") Monitoreo monitoreo,
-            @RequestParam(value = "id", required = true) int id, Model model) {
+            @RequestParam(value = "id", required = true) int id, Model model, @RequestParam("doc") MultipartFile file) {
         System.out.println("--> Actualizando la monitoreo.");
 
         ///Preparar Tipos de datos a trabajar
@@ -235,6 +235,20 @@ public class MonitoreoController {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(acceptableMediaTypes);
         HttpEntity<Monitoreo> entity = new HttpEntity<Monitoreo>(monitoreo, headers);
+        
+        //Se valida si el archivo recibido no esta vacio
+        if (!file.isEmpty()) {
+            LocalDate fecha = LocalDate.now();
+            String identificacion = monitoreo.getIdInfo() + "/" + fecha + "/";
+            String ruta = "c:/Archivos/Monitoreo/" + identificacion;
+            System.out.println("--->" + ruta);
+            //Se invoca al metodo para guardar el archivo localmente
+            String nombreArchivo = guardarAchivo(file, ruta);
+            if (nombreArchivo != null) {
+                String path = ruta + nombreArchivo;
+                monitoreo.setArchivo(path);
+            }
+        }
 
         // Enviamos el Request via PUT
         ResponseEntity<String> result = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionMonitoreos/monitoreosUp/{id}",

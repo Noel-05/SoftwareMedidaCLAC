@@ -71,9 +71,9 @@ public class BienesServicio {
         System.out.println("Editando bien con ID: " + bien.getIdBien());
         
         try{
-            String sql = "UPDATE registro.bienes SET idInformacionFinanciera=?, nombreBien=?, cantidadBien=? WHERE idBien = ?";
+            String sql = "UPDATE registro.bienes SET idInformacionFinanciera=?, nombreBien=?, cantidadBien=?, archivoBienes=? WHERE idBien = ?";
             
-            this.jdbcTemplate.update(sql, bien.getIdInformacionFinanciera(), bien.getNombreBien(), bien.getCantidadBien(), bien.getIdBien());
+            this.jdbcTemplate.update(sql, bien.getIdInformacionFinanciera(), bien.getNombreBien(), bien.getCantidadBien(), bien.getArchivo(), bien.getIdBien());
             
             System.out.println("Bien Actualizado Correctamente.");
             

@@ -62,6 +62,11 @@
                     <input path="ganancia" type="text" disabled class="form-control" style="width: 30%; text-align: center;" value="${monitoreoGetId.ganancia}"/>
                 </div>
                 
+                <div class="mb-3">
+                    <label path="archivo" class="form-label"><strong>Archivo Asociado </strong></label>
+                    <input path="archivo" type="text" disabled class="form-control" style="width: 30%; text-align: center;" value="${monitoreoGetId.archivo}"/>
+                </div>
+                
                 <p align="center"><a href="${getMonitoreos}" class="btn btn-danger">Regresar</a></p>
             </c:if>
         </div>

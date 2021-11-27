@@ -70,9 +70,9 @@ public class ProductoServicio {
         System.out.println("Editando producto con ID: " + producto.getId());
         
         try{
-            String sql = "UPDATE registro.productos SET idInformacionComercial=?, nombreProducto=?, precioVenta=?, precioFabricacion=? WHERE idProducto = ?";
+            String sql = "UPDATE registro.productos SET idInformacionComercial=?, nombreProducto=?, precioVenta=?, precioFabricacion=?, archivoProducto=? WHERE idProducto = ?";
             
-            this.jdbcTemplate.update(sql, producto.getIdInformacionComercial(), producto.getNombre(), producto.getPrecioVenta(), producto.getPrecioFabricacion(), producto.getId());
+            this.jdbcTemplate.update(sql, producto.getIdInformacionComercial(), producto.getNombre(), producto.getPrecioVenta(), producto.getPrecioFabricacion(), producto.getArchivo(), producto.getId());
             
             System.out.println("Producto Actualizado Correctamente.");
             

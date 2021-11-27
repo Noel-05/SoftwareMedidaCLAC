@@ -139,7 +139,7 @@ public class InformacionComercialController {
         headers.setAccept(acceptableMediaTypes);
         HttpEntity<InformacionComercial> entity = new HttpEntity<InformacionComercial>(infComercial, headers);
         
-         //Se valida si el archivo recibido no esta vacio
+        //Se valida si el archivo recibido no esta vacio
         if (!file.isEmpty()) {
             LocalDate fecha = LocalDate.now();
             String identificacion = infComercial.getIdInformacionOrganizacional() + "/" + fecha + "/";
@@ -220,7 +220,7 @@ public class InformacionComercialController {
     // Envíar una solicitud de actualización basados en la información enviada en el submit
     @RequestMapping(value = "/updateInformacionComercial", method = RequestMethod.POST)
     public String updateInformacionComercial(@ModelAttribute("informacionComercialAttribute") InformacionComercial infComercial,
-            @RequestParam(value="id",  required=true) int id, Model model) {
+            @RequestParam(value="id",  required=true) int id, Model model, @RequestParam("doc") MultipartFile file) {
         System.out.println("--> Actualizando la Infomracion Comercial.");
 
         ///Preparar Tipos de datos a trabajar
@@ -231,6 +231,20 @@ public class InformacionComercialController {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(acceptableMediaTypes);
         HttpEntity<InformacionComercial> entity = new HttpEntity<InformacionComercial>(infComercial, headers);
+        
+        //Se valida si el archivo recibido no esta vacio
+        if (!file.isEmpty()) {
+            LocalDate fecha = LocalDate.now();
+            String identificacion = infComercial.getIdInformacionOrganizacional() + "/" + fecha + "/";
+            String ruta = "c:/Archivos/InformacionComercial/" + identificacion;
+            System.out.println("--->" + ruta);
+            //Se invoca al metodo para guardar el archivo localmente
+            String nombreArchivo = guardarAchivo(file, ruta);
+            if (nombreArchivo != null) {
+                String path = ruta + nombreArchivo;
+                infComercial.setArchivo(path);
+            }
+        }
 
         // Enviamos el Request via PUT
         ResponseEntity<String> result = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/informacionComercialUp/{id}", 

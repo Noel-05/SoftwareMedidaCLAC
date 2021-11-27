@@ -218,7 +218,7 @@ public class InformacionFinancieraController {
     // Envíar una solicitud de actualización basados en la información enviada en el submit
     @RequestMapping(value = "/updateInformacionFinanciera", method = RequestMethod.POST)
     public String updateInfoFinanciera(@ModelAttribute("inforAttribute") InformacionFinanciera info,
-            @RequestParam(value="id",  required=true) int id, Model model) {
+            @RequestParam(value="id",  required=true) int id, Model model, @RequestParam("doc") MultipartFile file) {
         System.out.println("--> Actualizando la Informacion Financiera.");
 
         ///Preparar Tipos de datos a trabajar
@@ -229,6 +229,20 @@ public class InformacionFinancieraController {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(acceptableMediaTypes);
         HttpEntity<InformacionFinanciera> entity = new HttpEntity<InformacionFinanciera>(info, headers);
+        
+        //Se valida si el archivo recibido no esta vacio
+        if (!file.isEmpty()) {
+            LocalDate fecha = LocalDate.now();
+            String identificacion = info.getIdinformacionOrganizacional() + "/" + fecha + "/";
+            String ruta = "c:/Archivos/InformacionFinanciera/" + identificacion;
+            System.out.println("--->" + ruta);
+            //Se invoca al metodo para guardar el archivo localmente
+            String nombreArchivo = guardarAchivo(file, ruta);
+            if (nombreArchivo != null) {
+                String path = ruta + nombreArchivo;
+                info.setArchivo(path);
+            }
+        }
 
         // Enviamos el Request via PUT
         ResponseEntity<String> result = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/infoFinancieraUp/{id}", 

@@ -221,7 +221,7 @@ public class BienController {
     // Envíar una solicitud de actualización basados en la información enviada en el submit
     @RequestMapping(value = "/updateBienes", method = RequestMethod.POST)
     public String updateBienes(@ModelAttribute("bienesAttribute") Bienes bienes,
-            @RequestParam(value="id",  required=true) int id, Model model) {
+            @RequestParam(value="id",  required=true) int id, Model model, @RequestParam("doc") MultipartFile file) {
         System.out.println("--> Actualizando el Bien.");
 
         ///Preparar Tipos de datos a trabajar
@@ -232,6 +232,20 @@ public class BienController {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(acceptableMediaTypes);
         HttpEntity<Bienes> entity = new HttpEntity<Bienes>(bienes, headers);
+        
+        //Se valida si el archivo recibido no esta vacio
+        if (!file.isEmpty()) {
+            LocalDate fecha = LocalDate.now();
+            String identificacion = bienes.getIdInformacionFinanciera() + "/" + fecha + "/";
+            String ruta = "c:/Archivos/Bienes/" + identificacion;
+            System.out.println("--->" + ruta);
+            //Se invoca al metodo para guardar el archivo localmente
+            String nombreArchivo = guardarAchivo(file, ruta);
+            if (nombreArchivo != null) {
+                String path = ruta + nombreArchivo;
+                bienes.setArchivo(path);
+            }
+        }
 
         // Enviamos el Request via PUT
         ResponseEntity<String> result = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/bienesUp/{id}", 

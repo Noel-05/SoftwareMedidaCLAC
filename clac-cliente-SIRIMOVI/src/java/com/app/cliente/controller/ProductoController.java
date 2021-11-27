@@ -227,7 +227,7 @@ public class ProductoController {
     // Envíar una solicitud de actualización basados en la información enviada en el submit
     @RequestMapping(value = "/updateProducto", method = RequestMethod.POST)
     public String updateProducto(@ModelAttribute("productoAttribute") Producto producto,
-            @RequestParam(value="id",  required=true) int id, Model model) {
+            @RequestParam(value="id",  required=true) int id, Model model, @RequestParam("doc") MultipartFile file) {
         System.out.println("--> Actualizando el Producto.");
 
         ///Preparar Tipos de datos a trabajar
@@ -238,6 +238,20 @@ public class ProductoController {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(acceptableMediaTypes);
         HttpEntity<Producto> entity = new HttpEntity<Producto>(producto, headers);
+        
+        //Se valida si el archivo recibido no esta vacio
+        if (!file.isEmpty()) {
+            LocalDate fecha = LocalDate.now();
+            String identificacion = producto.getIdInformacionComercial() + "/" + fecha + "/";
+            String ruta = "c:/Archivos/Producto/" + identificacion;
+            System.out.println("--->" + ruta);
+            //Se invoca al metodo para guardar el archivo localmente
+            String nombreArchivo = guardarAchivo(file, ruta);
+            if (nombreArchivo != null) {
+                String path = ruta + nombreArchivo;
+                producto.setArchivo(path);
+            }
+        }
 
         // Enviamos el Request via PUT
         ResponseEntity<String> result = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionVisitas/productosUp/{id}", 

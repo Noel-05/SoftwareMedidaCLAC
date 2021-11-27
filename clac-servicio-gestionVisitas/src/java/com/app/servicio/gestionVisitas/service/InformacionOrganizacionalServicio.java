@@ -82,11 +82,12 @@ public class InformacionOrganizacionalServicio {
         cal.add(Calendar.DAY_OF_YEAR, 1);
         
         try{
-            String sql = "UPDATE registro.informacionorganizacional SET idRubro=?, nombreNegocio=?, cantidadEmpleados=?, direccionNegocio=?, cantidadSucursales =?, fechaRegistroVisita=?, idPais=?  "
+            String sql = "UPDATE registro.informacionorganizacional SET idRubro=?, nombreNegocio=?, cantidadEmpleados=?, direccionNegocio=?, cantidadSucursales =?, fechaRegistroVisita=?, idPais=?, archivoInformacionOrganizacional=?  "
                     + "WHERE idInformacionOrganizacional = ?";
             
             this.jdbcTemplate.update(sql, informacionOrganizacional.getIdRubro(), informacionOrganizacional.getNombreNegocio(), informacionOrganizacional.getCantEmpleados(),
-                    informacionOrganizacional.getDireccionNegocio(), informacionOrganizacional.getCantSucursales(), cal, informacionOrganizacional.getIdPais(), informacionOrganizacional.getIdInfOrganizacional());
+                    informacionOrganizacional.getDireccionNegocio(), informacionOrganizacional.getCantSucursales(), cal, informacionOrganizacional.getIdPais(), 
+                    informacionOrganizacional.getArchivo(), informacionOrganizacional.getIdInfOrganizacional());
             
             System.out.println("Informacion Organizacional Actualizada Correctamente.");
             

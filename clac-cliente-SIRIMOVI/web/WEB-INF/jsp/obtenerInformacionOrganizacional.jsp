@@ -52,9 +52,14 @@
                     <input path="nacio" type="text" disabled class="form-control" style="width: 30%; text-align: center;" value="${informacionOrganizacionalGetId.cantEmpleados}"/>
                 </div>
                 
-                 <div class="mb-3">
+                <div class="mb-3">
                     <label path="nacio" class="form-label"><strong>Cantidad de Sucursales </strong></label>
                     <input path="nacio" type="text" disabled class="form-control" style="width: 30%; text-align: center;" value="${informacionOrganizacionalGetId.cantSucursales}"/>
+                </div>
+                
+                <div class="mb-3">
+                    <label path="archivo" class="form-label"><strong>Archivo Asociado </strong></label>
+                    <input path="archivo" type="text" disabled class="form-control" style="width: 30%; text-align: center;" value="${informacionOrganizacionalGetId.archivo}"/>
                 </div>
                 
             </c:if>
