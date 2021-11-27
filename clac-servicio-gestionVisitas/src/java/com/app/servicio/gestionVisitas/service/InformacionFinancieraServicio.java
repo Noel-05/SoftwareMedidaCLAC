@@ -104,7 +104,7 @@ public class InformacionFinancieraServicio {
     public List<InformacionFinanciera> searchByID(int idInfOrg){
         System.out.println("Recuperando todos los datos de información financiera de la BD.");
         
-        String sql = "SELECT * FROM registro.informacionfinanciera AS INFFIN INNER JOIN registro.informacionorganizacional AS INFORG ON INFFIN.idInformacionOrganizacional =  INFORG.idInformacionOrganizacional WHERE  INFFIN.idInformacionOrganizacional = " + idInfOrg;
+        String sql = "SELECT * FROM registro.informacionfinanciera AS INFFIN INNER JOIN registro.informacionorganizacional AS INFORG ON INFFIN.idInformacionOrganizacional =  INFORG.idInformacionOrganizacional INNER JOIN registro.pais AS P ON P.idPais = INFORG.idPais WHERE  INFFIN.idInformacionOrganizacional = " + idInfOrg;
         
         infoFinanciera = this.jdbcTemplate.query(sql, new InformacionFinancieraRowMapper2());
         
