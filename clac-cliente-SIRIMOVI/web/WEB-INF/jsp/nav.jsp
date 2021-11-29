@@ -9,7 +9,8 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             
-            <c:url var="home" value="/" />
+            <c:url var="home" value="/index" />
+            <c:url var="login" value="/" />
             <c:url var="getPerson" value="/getall" />
             <c:url var="prueba" value="/getallPrueba" />
             <c:url var="informacionOrganizacional" value="/getallInformacionOrganizacional" />
@@ -24,6 +25,13 @@
                 <a class="navbar-brand" href="${home}" >
                     <img src="<c:url value='/img/CLAC-SFC21.png'/>" width="18%" height="18%"/>
                     <strong>&nbsp; &nbsp; &nbsp;SIRIMOVI</strong>
+                </a>
+                    
+                <a class="nav-link" href="${login}" style="color: white;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-power" viewBox="0 0 16 16">
+                        <path d="M7.5 1v7h1V1h-1z"/>
+                        <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"/>
+                    </svg>
                 </a>
                 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">

@@ -46,11 +46,6 @@
                     <label path="correo" class="form-label"><strong>Correo: </strong></label>
                     <input path="correo" type="email" disabled class="form-control" style="width: 30%; text-align: center;" value="${usuarioGetId.correo}"/>
                 </div>
-                    
-                <div class="mb-3">
-                    <label path="password" class="form-label"><strong>Contraseña: </strong></label>
-                    <input path="password" type="text" disabled class="form-control" style="width: 30%; text-align: center;" value="${usuarioGetId.password}"/>
-                </div>
                 
                 <p align="center"><a href="${getUser}" class="btn btn-danger">Regresar</a></p>
             </c:if>

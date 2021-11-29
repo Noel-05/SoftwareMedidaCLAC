@@ -5,8 +5,15 @@ import com.app.cliente.domain.usuarios.Rol;
 import com.app.cliente.domain.usuarios.RolList;
 import com.app.cliente.domain.usuarios.Usuario;
 import com.app.cliente.domain.usuarios.UsuarioList;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Base64;
+import javafx.beans.binding.Bindings;
+import jdk.nashorn.internal.runtime.JSONFunctions;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -26,6 +33,70 @@ public class UsuarioController {
         
     private RestTemplate restTemplate = new RestTemplate();
     ModelAndView mav = new ModelAndView();
+    
+    
+    // Login
+    @RequestMapping("/")
+    public ModelAndView login(){
+        mav.setViewName("login");
+        return mav;
+    }
+    
+    
+    // INICIAR SESION
+    @RequestMapping(value = "/iniciarSesion", method = RequestMethod.POST)
+    public String login(@RequestParam("correo") String correo, @RequestParam("password") String password, Model model) {
+        System.out.println("--> Buscando el usuario = "+correo);
+        
+        // Encriptamos la contraseña
+        String pass = password;
+        byte[] newPassword = null;
+        try {
+            newPassword = MessageDigest.getInstance("SHA").digest(pass.getBytes("UTF-8"));
+        } catch (Exception e) {
+            e.printStackTrace();   
+        }
+        String encriptado = Base64.getEncoder().encodeToString(newPassword);
+        encriptado = encriptado.replace("/", "");
+        System.out.println("________________");
+        System.out.println(encriptado);
+        
+
+        ///Preparar Tipos de datos a trabajar
+        List<MediaType> acceptableMediaTypes = new ArrayList<MediaType>();
+        acceptableMediaTypes.add(MediaType.APPLICATION_XML);
+
+        //Preparo el header
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(acceptableMediaTypes);
+        HttpEntity<Usuario> entity = new HttpEntity<Usuario>(headers);
+
+        ResponseEntity<String> result = restTemplate.exchange("http://localhost:8080/clac-servicio-gestionUsuarios/login/{correo}/{password}",
+                HttpMethod.GET, entity, String.class, correo, encriptado);
+
+        System.out.println(">>>>>>>>>>>");
+        System.out.println(result);
+        System.out.println(result.toString().length());
+        
+        if(result.toString().length() >= 320){
+            // Esto es para enviar al JSP de WEB-INF/jsp/consultarUsuarios.jsp
+            mav.addObject("alerta", "sinAlerta");
+            return "redirect:/index";
+            //return "nav";
+        }else{
+            // Esto es para enviar al JSP de WEB-INF/jsp/consultarUsuarios.jsp
+            mav.addObject("alerta", "alerta");
+            return "redirect:/";
+        }
+    }
+    
+    
+    // Index
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String index(Model model) {
+        return "index";
+    }
+    
     
     // LISTAR
     // Mostrar TODAS los Usuarios en el JSP

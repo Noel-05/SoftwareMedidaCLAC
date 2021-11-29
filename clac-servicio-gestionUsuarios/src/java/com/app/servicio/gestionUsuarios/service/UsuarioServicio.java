@@ -3,7 +3,9 @@ package com.app.servicio.gestionUsuarios.service;
 
 import com.app.servicio.gestionUsuarios.connect.Conexion;
 import com.app.servicio.gestionUsuarios.domain.Usuario;
+import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,24 @@ public class UsuarioServicio {
     private List<Usuario> usuarios = new ArrayList<Usuario>();
     List datos;
     
+    
+    // LOGIN    
+    public String login(String user, String pass){
+        System.out.println("Buscando al usuario con sus credenciales en la BD.");
+        
+        String resul;
+        
+        String sql = "select * from registro.usuarios where correoUsuario = ? and contrasenaUsuario = ?";
+        
+        resul = this.jdbcTemplate.query(sql, new UsuarioRowMapper(), user, pass).toString();
+        
+        System.out.println("===========");
+        System.out.println(resul);
+        System.out.println(resul.length());
+        
+        return resul;
+        
+    }
     
     // LISTAR todos los usuarios
     public List<Usuario> getAll(){
@@ -48,10 +68,23 @@ public class UsuarioServicio {
     public Usuario add(Usuario usuario){
         System.out.println("Insertando nuevo usuario.");
         
+        // Encriptamos la contraseña
+        String pass = usuario.getPassword();
+        byte[] newPassword = null;
+        try {
+            newPassword = MessageDigest.getInstance("SHA").digest(pass.getBytes("UTF-8"));
+        } catch (Exception e) {
+            e.printStackTrace();   
+        }
+        String encriptado = Base64.getEncoder().encodeToString(newPassword);
+        encriptado = encriptado.replace("/", "");
+        System.out.println("________________");
+        System.out.println(encriptado);
+        
         try{
             String sql = "INSERT INTO registro.usuarios(idRol, nombresUsuario, apellidosUsuario, correoUsuario, contrasenaUsuario) VALUES(?, ?, ?, ?, ?)";
             
-            this.jdbcTemplate.update(sql, usuario.getIdRol(),usuario.getNombre(), usuario.getApellido(),usuario.getCorreo(), usuario.getPassword());
+            this.jdbcTemplate.update(sql, usuario.getIdRol(),usuario.getNombre(), usuario.getApellido(),usuario.getCorreo(), encriptado);
             
             System.out.println("Usuario Insertado Correctamente. ");
             
@@ -69,10 +102,23 @@ public class UsuarioServicio {
     public Boolean edit(Usuario usuario){
         System.out.println("Editando Usuario con ID: " + usuario.getIdUsuario());
         
+        // Encriptamos la contraseña
+        String pass = usuario.getPassword();
+        byte[] newPassword = null;
+        try {
+            newPassword = MessageDigest.getInstance("SHA").digest(pass.getBytes("UTF-8"));
+        } catch (Exception e) {
+            e.printStackTrace();   
+        }
+        String encriptado = Base64.getEncoder().encodeToString(newPassword);
+        encriptado = encriptado.replace("/", "");
+        System.out.println("________________");
+        System.out.println(encriptado);
+        
         try{
             String sql = "UPDATE registro.usuarios SET idRol = ?, nombresUsuario = ?, apellidosUsuario = ?, correoUsuario = ?, contrasenaUsuario=? WHERE idUsuario = ?";
             
-            this.jdbcTemplate.update(sql, usuario.getIdRol(), usuario.getNombre(), usuario.getApellido(),usuario.getCorreo(), usuario.getPassword(), usuario.getIdUsuario());
+            this.jdbcTemplate.update(sql, usuario.getIdRol(), usuario.getNombre(), usuario.getApellido(),usuario.getCorreo(), encriptado, usuario.getIdUsuario());
             
             System.out.println("Usuario Actualizado Correctamente.");
             

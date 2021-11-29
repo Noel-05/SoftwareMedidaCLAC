@@ -53,7 +53,7 @@
                     
                 <div class="mb-3">
                     <form:label path="password" class="form-label">Contraseña: </form:label>
-                    <form:input path="password" required="true" type="text" class="form-control" aria-describedby="emailHelp" style="width: 30%;"/>
+                    <form:input path="password" required="true" type="password" class="form-control" aria-describedby="emailHelp" style="width: 30%;"/>
                     <div id="emailHelp" class="form-text">NO utilizar tildes ni el caracter Ñ.</div>
                 </div>
                     

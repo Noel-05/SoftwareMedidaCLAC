@@ -27,13 +27,6 @@ public class ClienteController {
     private RestTemplate restTemplate = new RestTemplate();
     ModelAndView mav = new ModelAndView();
     
-    @RequestMapping("/")
-    public ModelAndView Listar(){
-        mav.setViewName("index");
-        return mav;
-    }
-    
-    
     // LISTAR
     // Mostrar TODAS las personas en el JSP
     @RequestMapping(value = "/getall", method = RequestMethod.GET)

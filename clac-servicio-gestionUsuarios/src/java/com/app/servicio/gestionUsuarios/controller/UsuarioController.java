@@ -4,6 +4,8 @@ package com.app.servicio.gestionUsuarios.controller;
 import com.app.servicio.gestionUsuarios.domain.Usuario;
 import com.app.servicio.gestionUsuarios.domain.UsuarioList;
 import com.app.servicio.gestionUsuarios.service.UsuarioServicio;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -75,4 +77,22 @@ public class UsuarioController {
         return usuarioServicio.delete(idUsuario).toString();
     }
     
+    
+    // Metodo para recuperar todas las personas de la BD
+    @RequestMapping(value="/login/{correo}/{password}", method=RequestMethod.GET, headers="Accept=application/json, application/xml")
+    private @ResponseBody String login(@PathVariable("correo") String user, @PathVariable("password") String pass){
+        
+        System.out.println("******** BUSCANDO USER "+user+" ********");
+        
+        String resultado;
+        
+        resultado = usuarioServicio.login(user, pass).toString();
+        
+        System.out.println("<<<<<<<<<<<");
+        System.out.println(resultado); 
+        System.out.println(resultado.length());
+        
+        return resultado;
+       
+    }    
 }

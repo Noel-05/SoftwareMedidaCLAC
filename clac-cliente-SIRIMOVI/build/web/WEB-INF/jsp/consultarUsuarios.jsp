@@ -43,7 +43,6 @@
                                 <th class="text-center" style="color:red"><strong> Apellidos </strong></th>
                                 <th class="text-center" style="color:red"><strong> Rol </strong></th>
                                 <th class="text-center" style="color:red"><strong> Correo </strong></th>
-                                <th class="text-center" style="color:red"><strong> Contraseña </strong></th>
                                 <th class="text-center" style="color:red"><strong> Acciones </strong></th>
                             </tr>
                         </thead>
@@ -59,7 +58,6 @@
                                     <td><c:out value="${usuario.apellido}" /></td>
                                     <td><c:out value="${usuario.nombreRol}" /></td>
                                     <td><c:out value="${usuario.correo}" /></td>
-                                    <td><c:out value="${usuario.password}" /></td>
                                     <td>
                                         <a href="${editUrl}" class="btn btn-warning btn-sm" title="Editar Usuario"> 
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
